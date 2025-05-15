@@ -1,5 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap");
 @import "tailwindcss";
 @layer theme, base, components, utilities;
 
+/* Utilities */
+@utility cal-sans-regular {
+  font-family: "Cal Sans", sans-serif;
+  font-weight: 400;
+  color: var(--color-regular);
+}
+@utility cal-sans-bold {
+  font-family: "Cal Sans", sans-serif;
+  font-weight: 700;
+}
+@utility cal-sans-italic {
+  font-family: "Cal Sans", sans-serif;
+  font-style: italic;
+  color: var(--color-regular);
+}
+@utility cal-sans-italic-bold {
+  font-family: "Cal Sans", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+@utility spacing {
+  letter-spacing: 0.05em;
+}
+@utility line-height {
+  line-height: 1.5;
+}
+
+/* Theme */
 @theme {
+  /* Background Theme */
+  --color-background: oklch(0.936 0.032 17.717);
+  --color-background-hover: oklch(0.936 0.032 17.717, 0.9);
+
+  /* Regular Theme */
+  --color-regular: oklch(0.551 0.027 264.364);
+  --color-regular-hover: oklch(0.551 0.027 264.364, 0.9);
+
+  /* Red Theme */
+  --color-bold-red: rgb(232, 89, 87);
+  --color-bold-red-hover: rgb(232, 89, 87, 0.9);
+
+  /* Light Theme */
+  --color-light: rgb(255, 255, 255, 1);
+  --color-light-hover: rgb(255, 255, 255, 0.9);
+
+  /* Dark Theme */
+  --color-dark: rgb(0, 0, 0, 1);
+  --color-dark-hover: rgb(0, 0, 0, 0.9);
+
+  /* Yellow Dark Theme */
+  --color-yellow-dark: oklch(0.795 0.184 86.047);
+  --color-yellow-dark-hover: oklch(0.795 0.184 86.047, 0.9);
+
+  /* Yellow Light Theme */
+  --color-yellow-light: oklch(0.852 0.199 91.936);
+  --color-yellow-light-hover: oklch(0.852 0.199 91.936, 0.9);
+}
+
+* {
+  @apply box-border;
+  @apply spacing;
+  @apply line-height;
+}
+html {
+  @apply box-border;
+  @apply scroll-smooth;
+  @apply bg-light;
+}
+
+.clip-half-circle {
+  clip-path: inset(0 50% 0 0);
 }
