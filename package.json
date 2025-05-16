@@ -7,10 +7,13 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "vite --port 5173"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
     "@tailwindcss/vite": "^4.1.6",
+    "jsonwebtoken": "^9.0.2",
     "prop-types": "^15.8.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

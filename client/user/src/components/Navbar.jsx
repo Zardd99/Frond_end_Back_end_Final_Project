@@ -1,5 +1,7 @@
 import "../styles/index.css";
 import { Link, useLocation } from "react-router-dom";
+import { UserAuth } from "../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const links = [
   { name: "Home", href: "#home" },
@@ -11,7 +13,11 @@ const links = [
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { session, signOut } = UserAuth();
   const isAuthPage = ["/login", "/signup"].includes(location.pathname);
+
+  console.log(session);
 
   const handleScroll = (id) => (e) => {
     e.preventDefault();
@@ -26,12 +32,32 @@ const Navbar = () => {
     }
   };
 
+  const handleLogoClick = (e) => {
+    if (!session) {
+      e.preventDefault();
+      navigate("/signup");
+    }
+  };
+
+  const handleLogOut = async (e) => {
+    e.preventDefault();
+    try {
+      await signOut();
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <section className="Navbar fixed top-0 left-[50%] transform -translate-x-[50%] z-999 bg-background rounded-b-4xl w-full shadow-lg">
       <div className="container flex justify-between items-center p-10 h-12 mx-auto">
-        <Link to="/" className="cal-sans-bold text-2xl ">
-          {" "}
-          Foodle{" "}
+        <Link
+          to={session ? "/" : "/signup"}
+          onClick={handleLogoClick}
+          className="cal-sans-bold text-2xl "
+        >
+          Welcome, {session?.user?.email}
         </Link>
 
         {!isAuthPage && (
@@ -50,15 +76,26 @@ const Navbar = () => {
         )}
 
         <div className="Navbar_login cal-sans-regular flex items-center">
-          <Link to="/login" className="px-2 py-1 mx-2 hover:text-dark">
-            Login
-          </Link>
-          <Link
-            to="/signup"
-            className="px-2 py-1 mx-2 hover:text-dark border rounded-2xl"
-          >
-            Sign Up
-          </Link>
+          {session ? (
+            <button
+              onClick={handleLogOut}
+              className="px-2 py-1 mx-2 hover:text-dark"
+            >
+              Logout
+            </button>
+          ) : (
+            <>
+              <Link to="/login" className="px-2 py-1 mx-2 hover:text-dark">
+                Login
+              </Link>
+              <Link
+                to="/signup"
+                className="px-2 py-1 mx-2 hover:text-dark border rounded-2xl"
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </section>

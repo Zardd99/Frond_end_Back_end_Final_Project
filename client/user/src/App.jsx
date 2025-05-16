@@ -4,6 +4,7 @@ import { lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
 
 import ErrorBoundary from "./ErrorBoundary";
+import PrivateRoute from "./components/PrivateRoute";
 
 import Home from "./pages/Home";
 
@@ -25,7 +26,9 @@ function App() {
             path="/"
             element={
               <ErrorBoundary>
-                <Home />
+                <PrivateRoute>
+                  <Home />
+                </PrivateRoute>
               </ErrorBoundary>
             }
           />

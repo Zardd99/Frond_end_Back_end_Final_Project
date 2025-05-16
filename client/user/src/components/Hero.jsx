@@ -41,7 +41,7 @@ const Hero = () => {
               <div className="p-6"></div>
 
               <div className="flex cal-sans-regular gap-4 text-2xl">
-                <button className="group flex items-center gap-2 mr-6 p-2 pr-4 text-light bg-bold-red hover:bg-bold-red-hover rounded-[50px] hover:">
+                <button className="group flex items-center gap-2 mr-6 p-2 pr-4 text-light bg-bold-red hover:bg-bold-red-hover rounded-[50px] ">
                   <div className="bg-yellow-dark text-dark rounded-full p-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +62,7 @@ const Hero = () => {
                   {content.button}
                 </button>
                 <button className="group text-dark hover:text-regular-hover flex items-center gap-2 mr-6 p-2 pr-4">
-                  <div className="relative">
+                  <div className="relative ">
                     <div
                       className="absolute bg-bold-red rounded-full 
                     w-[120%] h-[120%] left-1/2 top-1/2 -translate-y-1/2 overflow-hidden -translate-x-1/2
