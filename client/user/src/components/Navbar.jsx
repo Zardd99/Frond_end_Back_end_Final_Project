@@ -32,13 +32,6 @@ const Navbar = () => {
     }
   };
 
-  const handleLogoClick = (e) => {
-    if (!session) {
-      e.preventDefault();
-      navigate("/signup");
-    }
-  };
-
   const handleLogOut = async (e) => {
     e.preventDefault();
     try {
@@ -52,11 +45,7 @@ const Navbar = () => {
   return (
     <section className="Navbar fixed top-0 left-[50%] transform -translate-x-[50%] z-999 bg-background rounded-b-4xl w-full shadow-lg">
       <div className="container flex justify-between items-center p-10 h-12 mx-auto">
-        <Link
-          to={session ? "/" : "/signup"}
-          onClick={handleLogoClick}
-          className="cal-sans-bold text-2xl "
-        >
+        <Link to="/" className="cal-sans-bold text-2xl ">
           Welcome, {session?.user?.email}
         </Link>
 
