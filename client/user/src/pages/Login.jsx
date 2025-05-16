@@ -11,13 +11,23 @@ const login = () => {
   const { session, loginUser } = UserAuth();
   const navigate = useNavigate();
   console.log(session);
-  // console.log(email, password);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
       const result = await loginUser(email, password);
+
+      if (result?.error) {
+        if (result.error.message.includes("Invalid login credentials")) {
+          setError("Invalid email or password. Please try again.");
+        } else if (result.error.message.includes("Email not confirmed")) {
+          setError("Please verify your email before logging in.");
+        } else {
+          setError(result.error.message);
+        }
+        return;
+      }
 
       if (result.success) {
         navigate("/");
@@ -39,7 +49,7 @@ const login = () => {
         <p className="cal-sans-regular text-xl">
           Don't Have An Account?{" "}
           <Link to="/signup" className="text-bold-red">
-            Login
+            Sign Up
           </Link>
         </p>
         <div className="p-3"></div>
@@ -68,7 +78,11 @@ const login = () => {
           >
             Log In
           </button>
-          {error && <p className="text-black text-center">{error}</p>}
+          {error && (
+            <p className="p-3 mt-4 rounded-xl bg-background cal-sans-regular text-bold-red text-center">
+              {error}
+            </p>
+          )}
         </div>
       </form>
     </div>
