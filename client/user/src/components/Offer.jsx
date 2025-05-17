@@ -27,17 +27,21 @@ const OFFER_CONTENTS = [
 const Offer = () => {
   return (
     <section
-      className="Offer flex container justify-between absolute -bottom-[100px]"
+      className="Offer flex container justify-between absolute -bottom-[100px] hover:scale-101 transition-all duration-300 group"
       id="offer"
     >
       <div className="Offer_Content_Wrapper flex p-10 rounded-[50px] bg-light shadow-2xl h-fit gap-4">
         {OFFER_CONTENTS.map((content, index) => (
           <div className="Offer_contents w-1/3 flex items-center" key={index}>
             <div className="Offer_Detail_Icon w-1/2 mr-2">
-              <img src={content.img} alt="" />
+              <img
+                src={content.img}
+                alt=""
+                className="group-hover:scale-110 transition-all duration-300 select-none"
+              />
             </div>
             <div className="Offer_Detail flex flex-col ">
-              <span className="Offer_Detail_Title cal-sans-bold text-2xl">
+              <span className="Offer_Detail_Title cal-sans-bold text-2xl group-hover:scale-110 group-hover:translate-x-3 transition-all duration-300">
                 {content.title}
               </span>
               <div className="p-2"></div>

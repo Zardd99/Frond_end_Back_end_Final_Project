@@ -1,19 +1,11 @@
-import React from "react";
-import { UserAuth } from "../AuthContext";
-import { useNavigate } from "react-router-dom";
-
 import "../styles/index.css";
 import Hero from "../components/Hero";
 import Offer from "../components/Offer";
 import Service from "../components/Service";
 import Menu from "../components/Menu";
+import Footer from "../components/Footer";
 
 const Home = () => {
-  const { session, signOut } = UserAuth();
-  const navigate = useNavigate();
-
-  console.log(session);
-
   return (
     <div className="App mx-auto">
       <div className="bg-background rounded-b-4xl h-screen ">
@@ -29,6 +21,7 @@ const Home = () => {
         <Offer />
         <Service />
         <Menu />
+        <Footer />
       </div>
     </div>
   );

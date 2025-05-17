@@ -95,7 +95,7 @@ const Hero = () => {
       <div className="Hero_Image group w-1/2">
         {HERO_CONTENT.map((content) => (
           <img
-            className="group-hover:scale-110 transition-all duration-200"
+            className="group-hover:scale-101 transition-all duration-200 select-none"
             src={content.img}
             alt="Loading..."
           />

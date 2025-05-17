@@ -16,7 +16,6 @@ const MenuCard = () => {
     description: "",
     image_url: "",
   });
-  const [deletingItemId, setDeletingItemId] = useState(null);
   const [itemToDelete, setItemToDelete] = useState(null);
 
   //
@@ -223,7 +222,7 @@ const MenuCard = () => {
                   e.stopPropagation();
                   setItemToDelete(item.id);
                 }}
-                className="absolute top-4 right-4 pointer z-40 cursor-pointer"
+                className="absolute top-4 right-4 pointer z-2 cursor-pointer"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -250,7 +249,7 @@ const MenuCard = () => {
                 <img
                   src={item.image_url || ""}
                   alt={item.title}
-                  className=" object-cover cal-sans-regular group-hover:scale-110 transition-all duration-300"
+                  className=" object-cover cal-sans-regular group-hover:scale-150 transition-all duration-300 select-none z-1"
                 />
               </div>
               <h2 className="cal-sans-bold text-2xl mb-2">{item.title}</h2>

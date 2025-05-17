@@ -52,7 +52,7 @@ const Service = () => {
             key={index}
           >
             <img
-              className="hover:scale-110 transition-all duration-300"
+              className="hover:scale-110 transition-all duration-300 select-none"
               src={content.img}
               alt=""
             />
