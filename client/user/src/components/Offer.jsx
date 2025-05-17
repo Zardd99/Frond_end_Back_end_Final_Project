@@ -1,6 +1,7 @@
 import React from "react";
 
 import Icon_Img from "../assets/Hero_img.png";
+import FastFood from "../assets/Burgur.png";
 
 const OFFER_CONTENTS = [
   {
@@ -13,7 +14,7 @@ const OFFER_CONTENTS = [
     title: "Fresh Food",
     description:
       "Your Food Will Be Delivered 100% Fresh To Your Home. We Do Not Deliver Stale Food.",
-    img: Icon_Img,
+    img: FastFood,
   },
   {
     title: "Free Delivery",

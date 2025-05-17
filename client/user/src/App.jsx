@@ -2,13 +2,14 @@ import "./styles/index.css";
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
 
 import ErrorBoundary from "./ErrorBoundary";
 
-import Home from "./pages/Home";
-
 const Login = lazy(() => import("./pages/Login"));
 const Sign_Up = lazy(() => import("./pages/Sign_Up"));
+const MenuItemDetail = lazy(() => import("./components/MenuItemDetail"));
+const AllMenu = lazy(() => import("./pages/AllMenu"));
 
 function App() {
   return (
@@ -42,6 +43,22 @@ function App() {
             element={
               <ErrorBoundary>
                 <Sign_Up />
+              </ErrorBoundary>
+            }
+          />
+          <Route
+            path="/menu/:itemId"
+            element={
+              <ErrorBoundary>
+                <MenuItemDetail />
+              </ErrorBoundary>
+            }
+          />
+          <Route
+            path="/allmenu"
+            element={
+              <ErrorBoundary>
+                <AllMenu />
               </ErrorBoundary>
             }
           />

@@ -32,7 +32,7 @@
 /* Theme */
 @theme {
   /* Background Theme */
-  --color-background: oklch(0.936 0.032 17.717);
+  --color-background: oklch(0.97 0.014 254.604);
   --color-background-hover: oklch(0.936 0.032 17.717, 0.9);
 
   /* Regular Theme */
@@ -47,7 +47,7 @@
   --color-light: rgb(255, 255, 255, 1);
   --color-light-hover: rgb(255, 255, 255, 0.9);
 
-  /* Dark Theme */
+  /* Black Theme */
   --color-dark: rgb(0, 0, 0, 1);
   --color-dark-hover: rgb(0, 0, 0, 0.9);
 
@@ -58,6 +58,9 @@
   /* Yellow Light Theme */
   --color-yellow-light: oklch(0.852 0.199 91.936);
   --color-yellow-light-hover: oklch(0.852 0.199 91.936, 0.9);
+
+  /* Delete Color */
+  --color-delete-form: oklch(0.282 0.091 267.935);
 }
 
 * {
@@ -73,4 +76,11 @@ html {
 
 .clip-half-circle {
   clip-path: inset(0 50% 0 0);
+}
+
+.email-popup {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  margin-top: 1rem;
+  transform-origin: top right;
 }

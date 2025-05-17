@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState, useContext } from "react";
-import { supabase } from "./supabaseClient";
+import { supabase } from "../../../server/middleware/supabaseClient";
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
@@ -36,7 +36,16 @@ export const signUpNewUser = async (email, password) => {
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
+      options: {
+        data: {
+          username: email.split("@")[0],
+        },
+      },
     });
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("user_id", data.user.id);
 
     if (error) {
       console.error("There was a problem signing up", error);
@@ -58,6 +67,7 @@ export const loginUser = async (email, password) => {
       email: email,
       password: password,
     });
+
     if (error) {
       console.error("log in error occurred", error);
       return { success: false, error: error.message };

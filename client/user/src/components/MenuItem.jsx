@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const MENU_STAR = [
   {
@@ -27,7 +28,10 @@ const MenuItem = ({ content, onRate }) => {
   };
 
   return (
-    <div className="Menu_Card_Content flex flex-col items-start justify-end bg-background pt-10 rounded-[2rem] p-5 w-1/2 h-3/4">
+    <Link
+      to={`/menu/${content.id}`}
+      className="Menu_Card_Content flex flex-col items-start justify-end bg-background pt-10 rounded-[2rem] p-5 w-1/2 h-3/4"
+    >
       <h3 className="cal-sans-bold text-2xl">{content.title}</h3>
       <div className="p-1"></div>
       <div className="flex items-center">
@@ -67,7 +71,7 @@ const MenuItem = ({ content, onRate }) => {
           Buy Now
         </button>
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 import ChickenBurger_Img from "../assets/FastFood.png";
-import ChickenPizza_Img from "../assets/ChickenPizza.jpg";
+import ChickenPizza_Img from "../assets/Burgur.png";
 import FrenchFries_Img from "../assets/FrenchFries.png";
 
 const SERVICE_CONTENT = [
@@ -51,7 +51,11 @@ const Service = () => {
             className="Categories w-1/3 flex flex-col items-center justify-center"
             key={index}
           >
-            <img className="" src={content.img} alt="" />
+            <img
+              className="hover:scale-110 transition-all duration-300"
+              src={content.img}
+              alt=""
+            />
             <div className="p-4"></div>
             <h2 className="cal-sans-bold text-4xl">
               {content.categories_title}
