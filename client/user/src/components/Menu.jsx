@@ -13,16 +13,29 @@ const MENU_CONTENT = [
 
 const Menu = ({ allMenuPage }) => {
   return (
-    <section className="Menu flex flex-col h-auto container" id="menu">
+    <section
+      className={`Menu flex flex-col container ${
+        allMenuPage ? `h-screen` : `h-auto`
+      }`}
+      id="menu"
+    >
       {/*  */}
       {/* Render "Go Back To Home Page When All MenuPage is Open" else Render "See All on the Button" */}
       {/*  */}
       <div className="Menu__Header flex flex-col justify-between">
-        <div className="Service_Title cal-sans-bold text-6xl">
-          Our {""}
-          <span className="text-bold-red">Regular</span>
-          Menu
-        </div>
+        {allMenuPage ? (
+          <div className="Service_Title cal-sans-bold text-6xl">
+            All Of Our {""}
+            <span className="text-bold-red">Regular {""}</span>
+            Menu
+          </div>
+        ) : (
+          <div className="Service_Title cal-sans-bold text-6xl">
+            Our {""}
+            <span className="text-bold-red">Regular {""}</span>
+            Menu
+          </div>
+        )}
         <div className="cal-sans-regular text-xl flex justify-between w-full">
           <div className="max-w-[36ch]">{MENU_CONTENT[0]?.description}</div>
           <div>

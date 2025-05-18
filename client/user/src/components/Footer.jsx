@@ -3,7 +3,10 @@ import { FaInstagram, FaFacebook, FaTwitter, FaGithub } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <section className="Footer container bg-background p-10 rounded-t-4xl">
+    <section
+      className="Footer container bg-background p-10 rounded-t-4xl"
+      id="about"
+    >
       <div className="Footer_Wrapper w-full h-full flex justify-around">
         <div className="flex flex-col">
           <div className="flex flex-col">
@@ -28,10 +31,18 @@ const Footer = () => {
         </div>
         <div className="flex flex-col gap-3">
           <h2 className="cal-sans-bold text-bold-red mb-4 text-3xl">Menu</h2>
-          <p className="text-regular cal-sans-regular">Home</p>
-          <p className="text-regular cal-sans-regular">Offers</p>
-          <p className="text-regular cal-sans-regular">Service</p>
-          <p className="text-regular cal-sans-regular">About Us</p>
+          <a href="#home" className="text-regular cal-sans-regular">
+            Home
+          </a>
+          <a href="#offer" className="text-regular cal-sans-regular">
+            Offers
+          </a>
+          <a href="#service" className="text-regular cal-sans-regular">
+            Service
+          </a>
+          <a href="#about" className="text-regular cal-sans-regular">
+            About Us
+          </a>
         </div>
         <div className="flex flex-col gap-3">
           <h2 className="cal-sans-bold text-bold-red mb-4 text-3xl">

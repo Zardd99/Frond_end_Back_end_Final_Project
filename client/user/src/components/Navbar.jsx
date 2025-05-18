@@ -136,12 +136,6 @@ const Navbar = () => {
         <div className="Navbar_login cal-sans-regular flex items-center">
           {session ? (
             <div className="relative flex items-center justify-between">
-              <button
-                onClick={handleLogOut}
-                className="px-2 py-1 mx-2 hover:text-dark"
-              >
-                Logout
-              </button>
               <div className="p-4"></div>
               <button
                 className=" w-10 h-10 overflow-hidden border rounded-full hover:border-background"
@@ -192,6 +186,14 @@ const Navbar = () => {
                       Admin
                     </span>
                   )}
+                </div>
+                <div className="cal-sans-bold mr-4 p-4 rounded-2xl flex w-full justify-end items-end">
+                  <button
+                    onClick={handleLogOut}
+                    className="px-2 py-1 mx-2 hover:text-dark"
+                  >
+                    Logout
+                  </button>
                 </div>
               </div>
             </div>
