@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth, signUpNewUser } from "../AuthContext";
+import { UserAuth } from "../AuthContext";
 import { Navigate } from "react-router-dom";
 
 const Sign_Up = () => {
@@ -9,9 +9,8 @@ const Sign_Up = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
 
-  const { session, signUpNewUser } = UserAuth();
+  const { signUpNewUser } = UserAuth();
   const navigate = useNavigate();
-  console.log(session);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -65,16 +64,21 @@ const Sign_Up = () => {
             placeholder="Email"
             className="p-3 mt-2 rounded-xl bg-light cal-sans-regular"
             type="email"
-            name=""
             id=""
+            autoFocus
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                document.getElementById("sign_up_password").focus();
+              }
+            }}
           />
           <input
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             className="p-3 mt-4 rounded-xl bg-light cal-sans-regular"
             type="password"
-            name=""
-            id=""
+            id="sign_up_password"
           />
           <button
             type="submit"

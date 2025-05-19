@@ -61,6 +61,9 @@
 
   /* Delete Color */
   --color-delete-form: oklch(0.282 0.091 267.935);
+
+  --text-2xs: 0.625rem;
+  --text-3xs: 0.5rem;
 }
 
 * {
@@ -78,7 +81,8 @@ html {
   clip-path: inset(0 50% 0 0);
 }
 
-.email-popup {
+.email-popup,
+.navbar-popup {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   margin-top: 1rem;

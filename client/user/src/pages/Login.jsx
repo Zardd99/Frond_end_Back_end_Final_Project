@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth, loginUser } from "../AuthContext";
+import { UserAuth } from "../AuthContext";
 
-const login = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
 
-  const { session, loginUser } = UserAuth();
+  const { loginUser } = UserAuth();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -59,16 +59,21 @@ const login = () => {
             placeholder="Email"
             className="p-3 mt-2 rounded-xl bg-light cal-sans-regular"
             type="email"
-            name=""
             id=""
+            autoFocus
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                document.getElementById("login_password").focus();
+              }
+            }}
           />
           <input
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             className="p-3 mt-4 rounded-xl bg-light cal-sans-regular"
             type="password"
-            name=""
-            id=""
+            id="login_password"
           />
           <button
             type="submit"
@@ -88,4 +93,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
