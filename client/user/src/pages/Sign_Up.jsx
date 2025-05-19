@@ -17,20 +17,24 @@ const Sign_Up = () => {
     e.preventDefault();
     setError("");
     setLoading(true);
+
     try {
       const result = await signUpNewUser(email, password);
 
-      if (result.error) {
-        if (result.error.message.includes("already exists")) {
-          setError(
-            "An account with this email already exists. Please login instead."
-          );
-        } else {
-          setError(result.error.message);
-        }
-        return;
-      }
+      if (!result?.error) return;
 
+      const defaultMessage = "Something went wrong";
+      const message = result.error.message?.includes("already exists")
+        ? "An account with this email already exists. Please login instead."
+        : result.error.message || defaultMessage;
+
+      console.log(result.error.message);
+      setError(message);
+
+      //
+      // Redirect to Home Page when Login Success
+      //
+      //
       if (result.success) {
         navigate("/");
       }
