@@ -1,8 +1,8 @@
 import React from "react";
 
-import ChickenBurger_Img from "../assets/FastFood.png";
-import ChickenPizza_Img from "../assets/Burgur.png";
-import FrenchFries_Img from "../assets/FrenchFries.png";
+import ChickenBurger_Img from "../../assets/FastFood.png";
+import ChickenPizza_Img from "../../assets/Burgur.png";
+import FrenchFries_Img from "../../assets/FrenchFries.png";
 
 const SERVICE_CONTENT = [
   {

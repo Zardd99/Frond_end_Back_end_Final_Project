@@ -1,7 +1,7 @@
 import React from "react";
 
-import Icon_Img from "../assets/Hero_img.png";
-import FastFood from "../assets/Burgur.png";
+import Icon_Img from "../../assets/Hero_img.png";
+import FastFood from "../../assets/Burgur.png";
 
 const OFFER_CONTENTS = [
   {

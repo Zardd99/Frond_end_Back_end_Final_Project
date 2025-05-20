@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import MenuCard from "./MenuCard";
 
-import Burgur from "../assets/horizon_banner.jpg";
-import Pizza from "../assets/verticle_banner.jpg";
+import Burgur from "../../assets/horizon_banner.jpg";
+import Pizza from "../../assets/verticle_banner.jpg";
 
 const MENU_CONTENT = [
   {

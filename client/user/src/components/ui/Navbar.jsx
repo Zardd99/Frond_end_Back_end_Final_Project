@@ -1,9 +1,8 @@
-import "../styles/index.css";
 import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { UserAuth } from "../AuthContext";
+import { UserAuth } from "../../context/AuthContext";
 import { useEffect, useState, useRef } from "react";
-import { supabase } from "../../../../server/middleware/supabaseClient";
+import { supabase } from "../../../../../server/middleware/supabaseClient";
 
 const links = [
   { name: "Home", href: "#home" },
@@ -13,7 +12,8 @@ const links = [
   { name: "About US", href: "#about" },
 ];
 
-import ProfileImg from "../assets/profile_picture.jpg";
+import ProfileImg from "../../assets/profile_picture.jpg";
+import Navbar_tablet from "../form/Navbar_tablet";
 
 const Navbar = () => {
   const location = useLocation();
@@ -21,14 +21,23 @@ const Navbar = () => {
   const { session, signOut } = UserAuth();
   const isAuthPage = ["/login", "/signup"].includes(location.pathname);
 
+  //
+  // State
+  //
+  //
   const [isEmailVisible, setIsEmailVisible] = useState(false);
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
   const [error, setError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+
+  //
+  // Ref
+  //
+  //
   const profileButtonRef = useRef(null);
   const emailPopupRef = useRef(null);
-  const navbarButtonRef = useRef(null);
   const navbarPopupRef = useRef(null);
+  const navbarButtonRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,8 +51,8 @@ const Navbar = () => {
 
           setIsAdmin(profiles?.role === "Admin");
         }
-      } catch (err) {
-        setError("Error", err);
+      } catch (error) {
+        setError("Error", error);
       }
     };
     fetchData();
@@ -81,15 +90,6 @@ const Navbar = () => {
   };
 
   //
-  // handle profile view
-  //
-  //
-  const handleProfileView = (e) => {
-    e.preventDefault();
-    setIsEmailVisible(!isEmailVisible);
-  };
-
-  //
   // Handle Auto Close THe profile's information's form
   //
   //
@@ -122,16 +122,17 @@ const Navbar = () => {
     const handleClickOutside = (event) => {
       if (
         navbarButtonRef.current &&
-        navbarPopupRef.current &&
         !navbarButtonRef.current.contains(event.target) &&
+        navbarPopupRef.current &&
         !navbarPopupRef.current.contains(event.target)
       ) {
         setIsNavbarVisible(false);
       }
     };
-    isNavbarVisible
-      ? document.addEventListener("click", handleClickOutside)
-      : null;
+
+    if (isNavbarVisible) {
+      document.addEventListener("click", handleClickOutside);
+    }
 
     return () => {
       document.removeEventListener("click", handleClickOutside);
@@ -139,7 +140,18 @@ const Navbar = () => {
   }, [isNavbarVisible]);
 
   //
+  // handle profile view
+  //
+  //
+  const handleProfileView = (e) => {
+    e.preventDefault();
+    setIsEmailVisible(!isEmailVisible);
+  };
+
+  //
   // Handle Navbar < 768px or tablet-screen
+  //
+  //
   const handleNavbar = (e) => {
     e.preventDefault();
     setIsNavbarVisible(!isNavbarVisible);
@@ -147,6 +159,12 @@ const Navbar = () => {
 
   return (
     <section className="Navbar fixed top-0 left-[50%] transform -translate-x-[50%] z-999 bg-background rounded-b-4xl w-full shadow-lg">
+      {error && (
+        <div className="error-message bg-red-100 text-red-700 p-3 rounded-lg mt-4 mx-auto max-w-md text-center">
+          {error}
+        </div>
+      )}
+
       <div className="container flex justify-between items-center p-10 h-12 mx-auto">
         <Link to="/" className="cal-sans-bold text-2xl ">
           Welcome
@@ -192,50 +210,12 @@ const Navbar = () => {
         {/* tablet-screen navbar */}
         {/*  */}
         <div className="absolute top-20 right-20 w-1/2 h-[calc(100dvh/3)]">
-          {!isAuthPage && (
-            <>
-              <div
-                className={`Navbar_link navbar-popup cal-sans-regular text-left text-sm bg-dark text-light p-4 flex md:hidden flex-col rounded-xl transition-all duration-300 h-full w-6/7 justify-around
-                  ${
-                    isNavbarVisible
-                      ? "opacity-100 translate-y-0 visible scale-100"
-                      : "opacity-0 -translate-y-4 invisible scale-95"
-                  }
-                  `}
-                ref={navbarPopupRef}
-                id="navbar_link"
-              >
-                {links.map((link) => (
-                  <a
-                    className="flex items-center justify-between pr-5"
-                    key={link.name}
-                    href={link.href}
-                    onClick={handleScroll(link.href.substring(1))}
-                  >
-                    <span
-                      key={link.name}
-                      href={link.href}
-                      onClick={handleScroll(link.href.substring(1))}
-                      className="mx-6 rounded-md hover:text-dark relative inline-block transition-all duration-200 hover:after:content-[''] hover:after:absolute hover:after:left-0 hover:after:bottom-0 hover:after:h-[2px] hover:after:w-1/2 hover:after:bg-bold-red hover:after:transition-all text-left"
-                    >
-                      {link.name}
-                    </span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="size-6"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm4.28 10.28a.75.75 0 0 0 0-1.06l-3-3a.75.75 0 1 0-1.06 1.06l1.72 1.72H8.25a.75.75 0 0 0 0 1.5h5.69l-1.72 1.72a.75.75 0 1 0 1.06 1.06l3-3Z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </a>
-                ))}
-              </div>
-            </>
+          {!isAuthPage && isNavbarVisible && (
+            <Navbar_tablet
+              ref={navbarPopupRef}
+              isNavbarVisible={isNavbarVisible}
+              links={links}
+            />
           )}
         </div>
 
@@ -271,7 +251,7 @@ const Navbar = () => {
                 <br />
                 <div className="cal-sans-bold mr-4 p-4 rounded-2xl">
                   User Name:
-                  <span className="cal-sans-italic ml-4 cal-sans-regular text-dark ">
+                  <span className="cal-sans-italic ml-4 cal-sans-regular text-light ">
                     {session?.user?.email ? (
                       <>
                         {session.user.email.slice(0, 2)}
@@ -284,11 +264,11 @@ const Navbar = () => {
                 <div className="cal-sans-bold mr-4 p-4 rounded-2xl">
                   User Role:
                   {!isAdmin ? (
-                    <span className="cal-sans-italic ml-4 cal-sans-regular text-dark ">
+                    <span className="cal-sans-italic ml-4 cal-sans-regular text-light ">
                       User
                     </span>
                   ) : (
-                    <span className="cal-sans-italic ml-4 cal-sans-regular text-dark ">
+                    <span className="cal-sans-italic ml-4 cal-sans-regular text-light ">
                       Admin
                     </span>
                   )}
@@ -296,7 +276,7 @@ const Navbar = () => {
                 <div className="cal-sans-bold mr-4 p-4 rounded-2xl flex w-full justify-end items-end">
                   <button
                     onClick={handleLogOut}
-                    className="px-2 py-1 mx-2 hover:text-dark"
+                    className="px-2 py-1 mx-2 hover:text-bold-red-hover"
                   >
                     Logout
                   </button>
@@ -305,12 +285,15 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" className="px-2 py-1 mx-2 hover:text-dark">
+              <Link
+                to="/login"
+                className="px-2 py-1 mx-2 hover:text-bold-red-hover"
+              >
                 Login
               </Link>
               <Link
                 to="/signup"
-                className="px-2 py-1 mx-2 hover:text-dark border rounded-2xl"
+                className="px-2 py-1 mx-2 hover:text-bold-red-hover border rounded-2xl"
               >
                 Sign Up
               </Link>

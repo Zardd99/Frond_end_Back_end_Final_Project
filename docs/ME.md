@@ -6,8 +6,8 @@
 
 # Build Docker images
 
-- docker build -t myapp .
+- docker build -t [myapp] .
 
 # Run with new image
 
-- docker run -p 5173:5173 myapp
+- docker run -p 5173:5173 [myapp]

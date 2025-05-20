@@ -1,9 +1,9 @@
 import "../styles/index.css";
-import Hero from "../components/Hero";
-import Offer from "../components/Offer";
-import Service from "../components/Service";
-import Menu from "../components/Menu";
-import Footer from "../components/Footer";
+import Hero from "../components/ui/Hero";
+import Offer from "../components/ui/Offer";
+import Service from "../components/ui/Service";
+import Menu from "../components/ui/Menu";
+import Footer from "../components/ui/Footer";
 
 const Home = () => {
   return (

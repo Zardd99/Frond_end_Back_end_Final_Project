@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { supabase } from "../../../../server/middleware/supabaseClient";
-import { UserAuth } from "../AuthContext";
+import { supabase } from "../../../../../server/middleware/supabaseClient";
+import { UserAuth } from "../../context/AuthContext";
 
 const MenuCard = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -116,6 +116,11 @@ const MenuCard = () => {
 
   return (
     <div className="container mx-auto p-8 relative">
+      {error && (
+        <div className="error-message bg-red-100 text-red-700 p-3 rounded-lg mt-4 mx-auto max-w-md text-center">
+          {error}
+        </div>
+      )}
       {isAdmin && (
         <div className="fixed bottom-8 right-8 flex gap-4">
           <button
@@ -249,7 +254,7 @@ const MenuCard = () => {
                 <img
                   src={item.image_url || ""}
                   alt={item.title}
-                  className=" object-cover cal-sans-regular group-hover:scale-150 transition-all duration-300 select-none z-1"
+                  className=" object-cover cal-sans-regular group-hover:scale-105 transition-all duration-300 select-none z-1"
                 />
               </div>
               <h2 className="cal-sans-bold text-2xl mb-2">{item.title}</h2>
