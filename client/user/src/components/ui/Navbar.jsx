@@ -151,7 +151,7 @@ const Navbar = () => {
       )}
 
       <div className="container flex justify-between items-center p-10 h-12 mx-auto">
-        <Link to="/" className="cal-sans-bold text-2xl ">
+        <Link to="/dashboard" className="cal-sans-bold text-2xl ">
           Welcome
         </Link>
 
@@ -194,7 +194,11 @@ const Navbar = () => {
         {/*  */}
         {/* tablet-screen navbar */}
         {/*  */}
-        <div className="absolute top-20 right-20 w-1/2 h-[calc(100dvh/3)]">
+        <div
+          className={`absolute top-20 right-20 w-1/2 h-[calc(100dvh/3)]
+          ${isNavbarVisible ? "flex" : "hidden"}
+          `}
+        >
           <Navbar_tablet
             ref={navbarPopupRef}
             isNavbarVisible={isNavbarVisible}
@@ -202,7 +206,7 @@ const Navbar = () => {
           />
         </div>
 
-        <div className="Navbar_login cal-sans-regular flex items-center">
+        <div className="Navbar_login cal-sans-regular flex items-center justify-between">
           {session ? (
             <div className="relative flex items-center justify-between">
               <div className="p-4"></div>
@@ -215,7 +219,7 @@ const Navbar = () => {
                 <img
                   src={ProfileImg}
                   alt="profile_img.jpg"
-                  className="object-fit  "
+                  className="object-fit cursor-pointer"
                 />
               </button>
 
@@ -231,15 +235,12 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link
-                to="/login"
-                className="px-2 py-1 mx-2 hover:text-bold-red-hover"
-              >
+              <Link to="/login" className="px-2 py-1 hover:text-bold-red-hover">
                 Login
               </Link>
               <Link
                 to="/signup"
-                className="px-2 py-1 mx-2 hover:text-bold-red-hover border rounded-2xl"
+                className="px-2 py-1 w-20 hover:text-bold-red-hover border rounded-2xl"
               >
                 Sign Up
               </Link>

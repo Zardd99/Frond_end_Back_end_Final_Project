@@ -29,7 +29,7 @@ const Login = () => {
       }
 
       if (result.success) {
-        navigate("/");
+        navigate("/dashboard");
       }
     } catch (err) {
       setError("an error occurred", err);

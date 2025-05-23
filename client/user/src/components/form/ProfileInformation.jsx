@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const ProfileInformation = forwardRef(({ isEmailVisible, isAdmin }, ref) => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const ProfileInformation = forwardRef(({ isEmailVisible, isAdmin }, ref) => {
     e.preventDefault();
     try {
       await signOut();
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       console.error(err);
     }
@@ -55,6 +56,11 @@ const ProfileInformation = forwardRef(({ isEmailVisible, isAdmin }, ref) => {
             Admin
           </span>
         )}
+      </div>
+      <div
+        className={`cal-sans-bold mr-4 p-4 rounded-2xl text-bold-red hover:text-bold-red-hover`}
+      >
+        <Link to="/dashboard/dashboard">Go to dashboard</Link>
       </div>
       <div className="cal-sans-bold mr-4 p-4 rounded-2xl flex w-full justify-end items-end">
         <button

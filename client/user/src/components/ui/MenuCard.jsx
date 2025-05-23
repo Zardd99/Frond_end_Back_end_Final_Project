@@ -245,7 +245,7 @@ const MenuCard = () => {
             )}
             <Link
               key={item.id}
-              to={`/menu/${item.id}`}
+              to={`/dashboard/menu/${item.id}`}
               className="bg-background p-6 rounded-3xl z-2"
             >
               {/* The Information

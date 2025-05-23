@@ -126,13 +126,13 @@ const MenuItemDetail = () => {
       <div className="max-w-4xl mx-auto">
         <div className="bg-background p-8 rounded-3xl mb-8">
           <Link
-            to="/"
+            to="/dashboard"
             className="cal-sans-bold text-bold-red hover:-translate-x-1 hover:transition-all hover:duration-150 mb-4 inline-block"
           >
             &larr; Back to Menu
           </Link>
           <h1 className="cal-sans-bold text-4xl mb-4">{menuItem.title}</h1>
-          <p className="cal-sans-bold text-bold-red text-2xl mb-4">
+          <p className="cal-sans-bold text-red text-2xl mb-4">
             {menuItem.price_tag}
           </p>
           <p className="cal-sans-regular mb-6">{menuItem.description}</p>

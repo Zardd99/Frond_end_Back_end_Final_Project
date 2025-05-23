@@ -36,10 +36,10 @@
   --color-background-hover: oklch(0.936 0.032 17.717, 0.9);
 
   /* Regular Theme */
-  --color-regular: oklch(0.551 0.027 264.364);
-  --color-regular-hover: oklch(0.551 0.027 264.364, 0.9);
+  --color-regular: oklch(70.7% 0.022 261.325);
+  --color-regular-hover: oklch(96.7% 0.003 264.542);
 
-  /* Red Theme */
+  /* Red Pink Theme */
   --color-bold-red: rgb(232, 89, 87);
   --color-bold-red-hover: rgb(232, 89, 87, 0.9);
 
@@ -59,7 +59,20 @@
   --color-yellow-light: oklch(0.852 0.199 91.936);
   --color-yellow-light-hover: oklch(0.852 0.199 91.936, 0.9);
 
-  /* Delete Color */
+  /* Green and Light Green */
+  --color-green: oklch(59.6% 0.145 163.225);
+  --color-light-green: oklch(96.2% 0.044 156.743);
+
+  /* Red */
+  --color-red: oklch(57.7% 0.245 27.325);
+  --color-light-red: oklch(70.4% 0.191 22.216);
+
+  /* Blue */
+  --color-blue: oklch(54.6% 0.245 262.881);
+  --color-light-blue: oklch(88.2% 0.059 254.128);
+  --color-blue-hover: oklch(62.3% 0.214 259.815);
+
+  /* Delete button Color */
   --color-delete-form: oklch(0.282 0.091 267.935);
 
   --text-2xs: 0.625rem;

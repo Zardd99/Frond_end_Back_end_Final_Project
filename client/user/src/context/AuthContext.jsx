@@ -4,17 +4,46 @@ const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [session, setSession] = useState(undefined);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  //
+  // Fetch User Role
+  //
+  //
+  const handleAuthState = async (session) => {
+    setSession(session);
+
+    if (session?.user) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("user_id", session.user.id)
+        .single();
+
+      setUser({
+        ...session.user,
+        role: profile?.role || "user",
+      });
+    } else {
+      setUser(null);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
+      handleAuthState(session);
     });
     supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
+      handleAuthState(session);
     });
   }, []);
 
-  // sign our
+  //
+  // sign out
+  //
+  //
   const signOut = () => {
     const { error } = supabase.auth.signOut();
     if (error) {
@@ -22,11 +51,18 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const value = {
+    session,
+    signUpNewUser,
+    signOut,
+    loginUser,
+    user,
+    loading,
+  };
+
   return (
-    <AuthContext.Provider
-      value={{ session, signUpNewUser, signOut, loginUser }}
-    >
-      {children}
+    <AuthContext.Provider value={value}>
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

@@ -41,15 +41,15 @@ const Menu = ({ allMenuPage }) => {
           <div>
             {allMenuPage ? (
               <Link
-                to="/"
-                className=" flex items-center px-5 py-2 text-sm text-light bg-bold-red hover:bg-bold-red-hover rounded-[50px] cal-sans-regular"
+                to="/dashboard"
+                className="flex items-center px-5 py-2 text-sm text-light bg-bold-red hover:bg-bold-red-hover rounded-[50px] cal-sans-regular cursor-pointer"
               >
-                Go Back To Home Page
+                Go back to home page
               </Link>
             ) : (
               <Link
-                to="/allmenu"
-                className=" flex items-center px-5 py-2 text-sm text-light bg-bold-red hover:bg-bold-red-hover rounded-[50px] cal-sans-regular"
+                to="/dashboard/allmenu"
+                className="flex items-center px-5 py-2 text-sm text-light bg-bold-red hover:bg-bold-red-hover rounded-[50px] cal-sans-regular cursor-pointer"
               >
                 See All
               </Link>
@@ -92,9 +92,13 @@ const Menu = ({ allMenuPage }) => {
           </div>
         </div>
       </div>
-      <div className="p-10"></div>
-      <div className="p-10"></div>
-      <div className="p-10"></div>
+      {!allMenuPage && (
+        <>
+          <div className="p-10"></div>
+          <div className="p-10"></div>
+          <div className="p-10"></div>
+        </>
+      )}
     </section>
   );
 };
