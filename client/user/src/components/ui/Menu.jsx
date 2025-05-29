@@ -13,7 +13,7 @@ const MENU_CONTENT = [
 
 const Menu = ({ allMenuPage }) => (
   <section
-    className={`Menu flex flex-col container ${
+    className={`Menu flex flex-col container mt-25 ${
       allMenuPage ? `h-screen` : `h-auto`
     }`}
     id="menu"

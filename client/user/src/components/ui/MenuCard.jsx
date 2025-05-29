@@ -48,13 +48,13 @@ const MenuCard = () => {
           <Link
             key={item.id}
             to={`/dashboard/menu/${item.id}`}
-            className="bg-background p-6 rounded-3xl shadow-lg shadow-regular hover:shadow-xl transition-shadow block"
+            className="group bg-background p-6 rounded-3xl shadow-lg shadow-regular hover:shadow-xl transition-shadow block"
           >
             <div className="h-48 mb-4 rounded-xl flex items-center justify-center">
               <img
                 src={item.image_url || ""}
                 alt={item.title}
-                className="object-cover w-full h-full rounded-xl"
+                className="object-contain w-full h-full rounded-xl group-hover:scale-105 transition-all duration-300 "
               />
             </div>
             <h2 className="cal-sans-bold text-2xl mb-2">{item.title}</h2>

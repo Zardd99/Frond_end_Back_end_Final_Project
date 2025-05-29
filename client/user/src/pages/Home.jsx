@@ -7,7 +7,7 @@ import Footer from "../components/ui/Footer";
 
 const Home = () => {
   return (
-    <div className="App mx-auto">
+    <main className="App mx-auto min-h-screen">
       <div className="bg-background rounded-b-4xl h-screen ">
         <div className="flex flex-col container mx-auto ">
           <div className="my-4"></div>
@@ -22,7 +22,7 @@ const Home = () => {
         <Menu />
         <Footer />
       </div>
-    </div>
+    </main>
   );
 };
 

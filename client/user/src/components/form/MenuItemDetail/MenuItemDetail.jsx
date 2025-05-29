@@ -326,7 +326,7 @@ const MenuItemDetail = () => {
           <p className="text-gray-500">Menu item not found</p>
           <Link
             to="/dashboard"
-            className="text-bold-red hover:underline mt-4 inline-block"
+            className="cal-sans-bold text-bold-red hover:underline mt-4 inline-block"
           >
             &larr; Back to Menu
           </Link>
@@ -340,7 +340,10 @@ const MenuItemDetail = () => {
       <div className="p-4"></div>
       <div className="container mx-auto p-4 lg:p-8">
         <div className="mb-6">
-          <Link to="/dashboard" className="text-bold-red hover:underline">
+          <Link
+            to="/dashboard"
+            className="cal-sans-bold text-bold-red hover:underline"
+          >
             &larr; Back to Menu
           </Link>
         </div>
@@ -352,7 +355,7 @@ const MenuItemDetail = () => {
                 <img
                   src={menuItem.image_url}
                   alt={menuItem.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.parentNode.innerHTML = `

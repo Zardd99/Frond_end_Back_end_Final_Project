@@ -49,14 +49,15 @@ const Service = () => {
       <div className="Categories_Wrap flex justify-between items-end mt-20">
         {SERVICE_CONTENT.map((content, index) => (
           <div
-            className="Categories w-1/3 flex flex-col items-center justify-center"
+            className="Categories w-1/3 h-3/4 flex flex-col items-center justify-end"
             key={index}
           >
             <img
-              className="hover:scale-110 transition-all duration-300 select-none"
+              className="object-contain hover:scale-105 transition-all duration-300 select-none"
               src={content.img}
               alt=""
             />
+
             <div className="p-4"></div>
             <h2 className="cal-sans-bold text-4xl">
               {content.categories_title}

@@ -143,7 +143,7 @@ const Navbar = () => {
   };
 
   return (
-    <section className="Navbar fixed top-0 left-[50%] transform -translate-x-[50%] z-999 bg-background rounded-b-4xl w-full shadow-lg">
+    <header className="Navbar fixed top-0 left-[50%] transform -translate-x-[50%] z-999 bg-background rounded-b-4xl w-full shadow-lg">
       {error && (
         <div className="error-message bg-red-100 text-red-700 p-3 rounded-lg mt-4 mx-auto max-w-md text-center">
           {error}
@@ -248,7 +248,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
-    </section>
+    </header>
   );
 };
 
