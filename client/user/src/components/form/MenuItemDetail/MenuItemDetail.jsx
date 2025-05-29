@@ -396,21 +396,64 @@ const MenuItemDetail = () => {
               onQuantityChange={(qty) => updateState({ quantity: qty })}
             />
 
-            <div className="space-y-4">
+            <div className="space-y-4 flex flex-col w-fit">
               <button
                 onClick={handleAddToCart}
                 disabled={isAddingToCart || !menuItem}
-                className="w-full bg-bold-red hover:bg-bold-red-hover text-light py-4 rounded-xl font-medium text-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="group relative overflow-hidden bg-gradient-to-r from-hero-orange-500 to-hero-red-500 hover:from-hero-orange-600 hover:to-hero-red-600 text-hero-white font-semibold px-8 py-4 rounded-full shadow-2xl hover:shadow-[0_10px_30px_rgba(249,115,22,0.25)] transition-all duration-300 transform hover:scale-105"
               >
-                {isAddingToCart ? "Adding..." : "Add to Cart"}
+                <div className="flex items-center gap-3">
+                  <div className="bg-hero-white/20 backdrop-blur-sm p-2 rounded-full group-hover:rotate-12 transition-transform duration-300">
+                    <svg
+                      className="w-5 h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                      />
+                    </svg>
+                  </div>
+                  <span className="text-lg">
+                    {" "}
+                    {isAddingToCart ? "Adding..." : "Add to Cart"}
+                  </span>
+                </div>
+                <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
               </button>
 
               <button
                 onClick={handleBuyNow}
                 disabled={isAddingToCart || isOrderProcessing || !menuItem}
-                className="w-full bg-green hover:opacity-90 text-light py-4 rounded-xl font-medium text-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="group relative overflow-hidden bg-gradient-to-r from-offer-fresh-500 to-offer-cool-500 hover:from-offer-fresh-600 hover:to-offer-cool-600 text-hero-white font-semibold px-8 py-4 rounded-full shadow-2xl hover:shadow-[0_10px_30px_rgba(249,115,22,0.25)] transition-all duration-300 transform hover:scale-105"
               >
-                {isOrderProcessing ? "Processing..." : "Buy Now"}
+                <div className="flex items-center gap-3">
+                  <div className="bg-hero-white/20 backdrop-blur-sm p-2 rounded-full group-hover:rotate-12 transition-transform duration-300">
+                    <svg
+                      className="w-5 h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                      />
+                    </svg>
+                  </div>
+                  <span className="text-lg">
+                    {isOrderProcessing ? "Processing..." : "Buy Now"}
+                  </span>
+                </div>
+                <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
               </button>
             </div>
           </ProductDetails>
@@ -434,7 +477,7 @@ const MenuItemDetail = () => {
         </div>
 
         {/* Reviews */}
-        <div className="bg-background rounded-3xl p-6 lg:p-8">
+        <div className="bg-gradient-to-r from-hero-orange-50 to-hero-red-100 rounded-3xl p-6 lg:p-8">
           <div className="flex items-center justify-between mb-8">
             <h2 className="cal-sans-bold text-2xl lg:text-3xl">
               Customer Reviews
@@ -442,9 +485,11 @@ const MenuItemDetail = () => {
             {session && (
               <button
                 onClick={() => updateState({ showReviewForm: !showReviewForm })}
-                className="bg-bold-red hover:bg-bold-red-hover text-light px-6 py-2 rounded-xl transition-colors"
+                className="group flex items-center gap-3 font-semibold px-6 py-2 bg-hero-red-500 text-light hover:bg-hero-white/50 rounded-full transition-all duration-300 backdrop-blur-sm"
               >
-                {showReviewForm ? "Hide Form" : "Write Review"}
+                <span className="text-lg group-hover:text-hero-orange-600 transition-colors duration-300">
+                  {showReviewForm ? "Hide Form" : "Write Review"}
+                </span>
               </button>
             )}
           </div>

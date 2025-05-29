@@ -34,7 +34,7 @@ const ReviewItem = ({
   }
 
   return (
-    <div className="p-6 bg-light rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+    <div className="p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
       <div className="flex justify-between items-start mb-4">
         <div>
           <div className="flex items-center space-x-3 mb-2">
@@ -63,14 +63,14 @@ const ReviewItem = ({
                   setEditText(comment.comment);
                   setEditRating(comment.rating);
                 }}
-                className="text-blue-hover hover:text-blue text-sm px-3 py-1 rounded-lg hover:bg-light-blue transition-colors"
+                className="text-offer-cool-400 hover:text-offer-cool-500 text-sm px-3 py-1 rounded-lg hover:bg-offer-cool-100 transition-colors"
               >
                 Edit
               </button>
             )}
             <button
               onClick={() => onDelete(comment.id, comment.user_id)}
-              className="text-light-red hover:text-red text-sm px-3 py-1 rounded-lg hover:bg-very-light-red transition-colors"
+              className="text-offer-accent-400 hover:text-offer-accent-500 text-sm px-3 py-1 rounded-lg hover:bg-offer-primary-50 transition-colors"
             >
               Delete
             </button>

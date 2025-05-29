@@ -10,8 +10,8 @@ const SizeOptions = ({ sizes, selectedSize, onSelectSize, basePrice }) => (
           onClick={() => onSelectSize(size.id)}
           className={`p-3 rounded-xl border-2 transition-all duration-200 ${
             selectedSize === size.id
-              ? "border-bold-red bg-bold-red text-light"
-              : "border-regular hover:border-bold-red hover:bg-very-light-red"
+              ? "border-hero-orange-500 bg-gradient-to-r from-hero-red-300 to-hero-yellow-200"
+              : "hover:border-hero-red-500 hover:bg-hero-red-100"
           }`}
         >
           <div className="font-medium">{size.name}</div>

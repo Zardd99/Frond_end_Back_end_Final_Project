@@ -10,7 +10,10 @@ const ReviewForm = ({
   setComment,
   isEditing = false,
 }) => (
-  <form onSubmit={onSubmit} className="mb-8 p-6 bg-light rounded-2xl">
+  <form
+    onSubmit={onSubmit}
+    className="mb-8 p-6 bg-gradient-to-br from-offer-accent-50 to-offer-purple-100 rounded-2xl"
+  >
     <div className="mb-4">
       <label className="block text-sm font-medium mb-2">Your Rating</label>
       <StarRating rating={rating} interactive={true} onRate={setRating} />
@@ -30,16 +33,24 @@ const ReviewForm = ({
     <div className="flex space-x-4">
       <button
         type="submit"
-        className="bg-bold-red hover:bg-bold-red-hover text-light px-6 py-2 rounded-xl transition-colors"
+        className="group relative overflow-hidden bg-gradient-to-r from-hero-orange-500 to-hero-red-500 hover:from-hero-orange-600 hover:to-hero-red-600 text-hero-white font-semibold px-5 py-2 rounded-full shadow-2xl hover:shadow-[0_10px_30px_rgba(249,115,22,0.25)] transition-all duration-300 transform hover:scale-105"
       >
-        {isEditing ? "Update Review" : "Submit Review"}
+        <div className="flex items-center gap-3">
+          <span className="text-lg">
+            {isEditing ? "Update Review" : "Submit Review"}
+          </span>
+        </div>
+        <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
       </button>
       <button
         type="button"
         onClick={onCancel}
-        className="bg-regular hover:opacity-90 text-light px-6 py-2 rounded-xl transition-colors"
+        className="group relative overflow-hidden bg-gradient-to-r from-hero-red-500 to-hero-red-200 hover:from-hero-red-600 hover:to-hero-red-600 text-hero-white font-semibold px-5 py-2 rounded-full shadow-2xl hover:shadow-[0_10px_30px_rgba(249,115,22,0.25)] transition-all duration-300 transform hover:scale-105"
       >
-        Cancel
+        <div className="flex items-center gap-3">
+          <span className="text-lg">Cancel</span>
+        </div>
+        <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
       </button>
     </div>
   </form>

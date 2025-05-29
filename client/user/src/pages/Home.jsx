@@ -9,11 +9,9 @@ const Home = () => {
   return (
     <main className="App mx-auto min-h-screen">
       <div className="bg-background rounded-b-4xl h-screen ">
-        <div className="flex flex-col container mx-auto ">
+        <div className="flex flex-col mx-auto ">
           <div className="my-4"></div>
-          <div>
-            <Hero />
-          </div>
+          <Hero />
         </div>
       </div>
       <div className="flex flex-col container mx-auto items-start">

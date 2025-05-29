@@ -28,6 +28,8 @@ const Navbar = () => {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
   const [error, setError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isNavbarHidden, setIsNavbarHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   //
   // Ref
@@ -58,10 +60,49 @@ const Navbar = () => {
   }, [session]);
 
   //
-  // handle scroll behavior
+  // Handle scroll-based inspired by store.supercell.com
   //
   //
-  const handleScroll = (id) => (e) => {
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY <= 10) {
+        setIsNavbarHidden(false);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsNavbarHidden(true);
+      } else if (currentScrollY < lastScrollY) {
+        setIsNavbarHidden(false);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    let timeoutId = null;
+    const throttledHandleScroll = () => {
+      if (timeoutId === null) {
+        timeoutId = setTimeout(() => {
+          handleScroll();
+          timeoutId = null;
+        }, 10);
+      }
+    };
+
+    window.addEventListener("scroll", throttledHandleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", throttledHandleScroll);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [lastScrollY]);
+
+  //
+  // handle scroll behavior for navigation links
+  //
+  //
+  const handleScrollToSection = (id) => (e) => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
@@ -143,7 +184,16 @@ const Navbar = () => {
   };
 
   return (
-    <header className="Navbar fixed top-0 left-[50%] transform -translate-x-[50%] z-999 bg-background rounded-b-4xl w-full shadow-lg">
+    <header
+      className={`Navbar fixed top-0 left-[50%] z-999 bg-background rounded-b-4xl w-full shadow-lg transition-transform duration-300 ease-in-out ${
+        isNavbarHidden ? "-translate-y-full" : "translate-y-0"
+      }`}
+      style={{
+        transform: `translateX(-50%) ${
+          isNavbarHidden ? "translateY(-100%)" : "translateY(0)"
+        }`,
+      }}
+    >
       {error && (
         <div className="error-message bg-red-100 text-red-700 p-3 rounded-lg mt-4 mx-auto max-w-md text-center">
           {error}
@@ -165,7 +215,7 @@ const Navbar = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={handleScroll(link.href.substring(1))}
+                  onClick={handleScrollToSection(link.href.substring(1))}
                   className="mx-6 rounded-md hover:text-dark relative inline-block transition-all duration-200 hover:after:content-[''] hover:after:absolute hover:after:left-0 hover:after:bottom-0 hover:after:h-[2px] hover:after:w-1/2 hover:after:bg-bold-red hover:after:transition-all text-left"
                 >
                   {link.name}
