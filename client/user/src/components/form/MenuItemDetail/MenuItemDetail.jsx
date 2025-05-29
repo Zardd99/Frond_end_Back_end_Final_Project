@@ -325,7 +325,7 @@ const MenuItemDetail = () => {
         <div className="text-center py-8">
           <p className="text-gray-500">Menu item not found</p>
           <Link
-            to="/menu"
+            to="/dashboard"
             className="text-bold-red hover:underline mt-4 inline-block"
           >
             &larr; Back to Menu
@@ -340,7 +340,7 @@ const MenuItemDetail = () => {
       <div className="p-4"></div>
       <div className="container mx-auto p-4 lg:p-8">
         <div className="mb-6">
-          <Link to="/menu" className="text-bold-red hover:underline">
+          <Link to="/dashboard" className="text-bold-red hover:underline">
             &larr; Back to Menu
           </Link>
         </div>
