@@ -9,7 +9,9 @@ import PrivateRoute from "./pages/PrivateRoute";
 const Login = lazy(() => import("./pages/Login"));
 const Sign_Up = lazy(() => import("./pages/Sign_Up"));
 const AllMenu = lazy(() => import("./pages/AllMenu"));
-const MenuItemDetail = lazy(() => import("./components/form/MenuItemDetail"));
+const MenuItemDetail = lazy(() =>
+  import("./components/form/MenuItemDetail/MenuItemDetail")
+);
 const DashboardLayout = lazy(() => import("./components/form/DashboardLayout"));
 const AdminDashboard = lazy(() =>
   import("../../admin/src/components/form/AdminDashboard")
@@ -31,7 +33,7 @@ function App() {
             <Route path="/dashboard" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Sign_Up />} />
-            <Route path="/dashboard/allmenu" element={<AllMenu />} />
+            <Route path="/allmenu" element={<AllMenu />} />
             <Route
               path="/dashboard/menu/:itemId"
               element={<MenuItemDetail />}

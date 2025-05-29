@@ -66,6 +66,7 @@
   /* Red */
   --color-red: oklch(57.7% 0.245 27.325);
   --color-light-red: oklch(70.4% 0.191 22.216);
+  --color-very-light-red: oklch(97.1% 0.013 17.38);
 
   /* Blue */
   --color-blue: oklch(54.6% 0.245 262.881);

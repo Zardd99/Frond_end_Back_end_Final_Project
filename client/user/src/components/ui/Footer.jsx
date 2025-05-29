@@ -14,7 +14,7 @@ const Footer = () => {
               Fooodish
             </h2>
             <p className="text-regular cal-sans-regular mb-4">
-              Continue Foodish 2023 all rights reserved
+              Continue Foodish {new Date().getFullYear()} all rights reserved
             </p>
           </div>
           <div className="flex flex-col">

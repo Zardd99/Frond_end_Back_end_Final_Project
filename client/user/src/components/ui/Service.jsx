@@ -3,6 +3,7 @@ import React from "react";
 import ChickenBurger_Img from "../../assets/FastFood.png";
 import ChickenPizza_Img from "../../assets/Burgur.png";
 import FrenchFries_Img from "../../assets/FrenchFries.png";
+import { Link } from "react-router-dom";
 
 const SERVICE_CONTENT = [
   {
@@ -61,7 +62,10 @@ const Service = () => {
               {content.categories_title}
             </h2>
             <div className="p-2"></div>
-            <span className="group cal-sans-regular text-bold-red text-2xl flex items-center hover:underline hover:decoration-3 hover:underline-offset-4 hover:text-bold-red-hover">
+            <Link
+              className="group cal-sans-regular text-bold-red text-2xl flex items-center hover:underline hover:decoration-3 hover:underline-offset-4 hover:text-bold-red-hover"
+              to="/allmenu"
+            >
               {content.categories_description}
               <span>
                 <svg
@@ -79,7 +83,7 @@ const Service = () => {
                   />
                 </svg>
               </span>
-            </span>
+            </Link>
           </div>
         ))}
       </div>
