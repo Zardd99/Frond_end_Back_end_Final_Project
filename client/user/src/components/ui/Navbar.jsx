@@ -185,30 +185,38 @@ const Navbar = () => {
 
   return (
     <header
-      className={`Navbar fixed top-0 left-[50%] z-999 bg-background rounded-b-4xl w-full shadow-lg transition-transform duration-300 ease-in-out ${
-        isNavbarHidden ? "-translate-y-full" : "translate-y-0"
-      }`}
+      className={`Navbar fixed top-0 left-[50%] z-50 bg-hero-white/80 backdrop-blur-xl border border-hero-gray-100/20 rounded-3xl w-[95%] max-w-7xl shadow-2xl shadow-black/5 transition-all duration-500 ease-out ${
+        isNavbarHidden
+          ? "-translate-y-full opacity-0"
+          : "translate-y-0 opacity-100"
+      } mt-4`}
       style={{
         transform: `translateX(-50%) ${
-          isNavbarHidden ? "translateY(-100%)" : "translateY(0)"
+          isNavbarHidden ? "translateY(-150%)" : "translateY(0)"
         }`,
       }}
     >
       {error && (
-        <div className="error-message bg-red-100 text-red-700 p-3 rounded-lg mt-4 mx-auto max-w-md text-center">
-          {error}
+        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-gradient-to-r from-hero-red-50 to-hero-pink-50 text-hero-red-700 px-6 py-3 rounded-2xl shadow-lg border border-hero-red-100 backdrop-blur-sm">
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 bg-hero-red-400 rounded-full animate-pulse"></div>
+            <span className="text-sm font-medium">{error}</span>
+          </div>
         </div>
       )}
 
-      <div className="container flex justify-between items-center p-10 h-12 mx-auto">
-        <Link to="/dashboard" className="cal-sans-bold text-2xl ">
+      <div className="container flex justify-between items-center px-8 py-4 mx-auto">
+        <Link
+          to="/"
+          className="cal-sans-bold text-2xl bg-gradient-to-r from-offer-purple-600 via-offer-cool-600 to-offer-emerald-600 bg-clip-text text-transparent hover:from-offer-purple-700 hover:via-offer-cool-700 hover:to-offer-emerald-700 transition-all duration-300 transform hover:scale-105"
+        >
           Welcome
         </Link>
 
         {!isAuthPage && (
           <div className="flex justify-end md:justify-center w-full">
-            <div
-              className={`Navbar_link cal-sans-regular px-2 py-1 mx-2 text-left text-sm hidden md:flex md:text-md`}
+            <nav
+              className={`Navbar_link cal-sans-regular hidden md:flex items-center space-x-1 bg-hero-gray-50/60 backdrop-blur-sm rounded-2xl px-3 py-2 border border-hero-gray-200/30`}
               id="navbar_link"
             >
               {links.map((link) => (
@@ -216,28 +224,34 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={handleScrollToSection(link.href.substring(1))}
-                  className="mx-6 rounded-md hover:text-dark relative inline-block transition-all duration-200 hover:after:content-[''] hover:after:absolute hover:after:left-0 hover:after:bottom-0 hover:after:h-[2px] hover:after:w-1/2 hover:after:bg-bold-red hover:after:transition-all text-left"
+                  className="relative px-4 py-2 text-sm font-medium text-hero-gray-700 rounded-xl hover:text-hero-white hover:bg-gradient-to-r hover:from-offer-purple-500 hover:to-offer-cool-500 transition-all duration-300 ease-out transform hover:scale-105 hover:shadow-lg group"
                 >
-                  {link.name}
+                  <span className="relative z-10">{link.name}</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-offer-purple-400/20 to-offer-cool-400/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
                 </a>
               ))}
-            </div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-6 flex md:hidden"
+            </nav>
+
+            <button
+              className="flex md:hidden items-center justify-center w-12 h-12 bg-gradient-to-br from-hero-gray-50 to-hero-gray-100 hover:from-offer-purple-50 hover:to-offer-cool-50 rounded-2xl shadow-lg border border-hero-gray-200/50 transition-all duration-300 ease-out transform hover:scale-110 hover:shadow-xl active:scale-95"
               onClick={handleNavbar}
               ref={navbarButtonRef}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 9h16.5m-16.5 6.75h16.5"
-              />
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                className="w-5 h-5 text-hero-gray-600"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 9h16.5m-16.5 6.75h16.5"
+                />
+              </svg>
+            </button>
           </div>
         )}
 
@@ -245,9 +259,11 @@ const Navbar = () => {
         {/* tablet-screen navbar */}
         {/*  */}
         <div
-          className={`absolute top-20 right-20 w-1/2 h-[calc(100dvh/3)]
-          ${isNavbarVisible ? "flex" : "hidden"}
-          `}
+          className={`absolute top-20 right-8 w-80 transition-all duration-300 ease-out ${
+            isNavbarVisible
+              ? "flex opacity-100 translate-y-0"
+              : "hidden opacity-0 -translate-y-4"
+          }`}
         >
           <Navbar_tablet
             ref={navbarPopupRef}
@@ -256,12 +272,11 @@ const Navbar = () => {
           />
         </div>
 
-        <div className="Navbar_login cal-sans-regular flex items-center justify-between">
+        <div className="Navbar_login cal-sans-regular flex items-center space-x-3">
           {session ? (
-            <div className="relative flex items-center justify-between">
-              <div className="p-4"></div>
+            <div className="relative flex items-center">
               <button
-                className=" w-10 h-10 overflow-hidden border rounded-full hover:border-background"
+                className="group relative w-12 h-12 overflow-hidden rounded-2xl bg-gradient-to-br from-offer-purple-100 to-offer-cool-100 border-2 border-transparent hover:border-offer-purple-200 transition-all duration-300 ease-out transform hover:scale-110 hover:shadow-xl active:scale-95"
                 id="email_profile"
                 ref={profileButtonRef}
                 onClick={handleProfileView}
@@ -269,8 +284,10 @@ const Navbar = () => {
                 <img
                   src={ProfileImg}
                   alt="profile_img.jpg"
-                  className="object-fit cursor-pointer"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-br from-offer-purple-400/20 to-offer-cool-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-offer-fresh-400 border-2 border-light rounded-full shadow-sm"></div>
               </button>
 
               {/* */}
@@ -284,17 +301,21 @@ const Navbar = () => {
               />
             </div>
           ) : (
-            <>
-              <Link to="/login" className="px-2 py-1 hover:text-bold-red-hover">
-                Login
+            <div className="flex items-center space-x-3">
+              <Link
+                to="/login"
+                className="px-6 py-2 text-sm font-medium text-hero-gray-700 hover:text-offer-purple-600 transition-colors duration-300 relative group"
+              >
+                <span className="relative z-10">Login</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-offer-purple-50 to-offer-cool-50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-110"></div>
               </Link>
               <Link
                 to="/signup"
-                className="px-2 py-1 w-20 hover:text-bold-red-hover border rounded-2xl"
+                className="px-6 py-2 text-sm font-medium text-light bg-gradient-to-r from-offer-purple-500 to-offer-cool-500 hover:from-offer-purple-600 hover:to-offer-cool-600 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 ease-out transform hover:scale-105 active:scale-95 border border-offer-purple-400/30"
               >
                 Sign Up
               </Link>
-            </>
+            </div>
           )}
         </div>
       </div>

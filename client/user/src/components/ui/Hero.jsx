@@ -11,7 +11,10 @@ const HERO_CONTENT = [
 ];
 
 const Hero = () => (
-  <section className="relative min-h-screen overflow-hidden cal-sans-regular rounded-2xl">
+  <section
+    className="relative min-h-screen overflow-hidden cal-sans-regular rounded-2xl"
+    id="home"
+  >
     {/*  */}
     {/* Animate Background Div */}
     {/*  */}

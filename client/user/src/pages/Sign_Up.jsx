@@ -35,7 +35,7 @@ const Sign_Up = () => {
       //
       //
       if (result.success) {
-        navigate("/dashboard");
+        navigate("/");
       }
     } catch (err) {
       setError("an error occurred", err);

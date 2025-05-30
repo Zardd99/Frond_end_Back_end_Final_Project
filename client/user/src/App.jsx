@@ -30,7 +30,7 @@ function App() {
         <ErrorBoundary>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Home />} />
+            {/* <Route path="/dashboard" element={<Home />} /> */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Sign_Up />} />
             <Route path="/allmenu" element={<AllMenu />} />
@@ -40,15 +40,9 @@ function App() {
             />
 
             <Route element={<PrivateRoute allowedRoles={["user", "Admin"]} />}>
-              <Route
-                path="/dashboard/dashboard"
-                element={<DashboardLayout />}
-              />
+              <Route path="/dashboard" element={<DashboardLayout />} />
               <Route element={<PrivateRoute allowedRoles={["Admin"]} />}>
-                <Route
-                  path="/dashboard/dashboard/admin"
-                  element={<AdminDashboard />}
-                />
+                <Route path="/dashboard/admin" element={<AdminDashboard />} />
               </Route>
             </Route>
 

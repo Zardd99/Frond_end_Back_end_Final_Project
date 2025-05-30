@@ -19,15 +19,12 @@ const DashboardLayout = () => {
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center space-x-4">
               <h1 className="text-xl font-bold">Dashboard</h1>
-              <Link
-                to="/dashboard"
-                className="px-3 py-2 hover:bg-regular-hover rounded"
-              >
+              <Link to="/" className="px-3 py-2 hover:bg-regular-hover rounded">
                 Home
               </Link>
               {user?.role === "Admin" && (
                 <Link
-                  to="/dashboard/dashboard/admin"
+                  to="/dashboard/admin"
                   className="px-3 py-2 hover:bg-regular-hover rounded"
                 >
                   Admin Panel

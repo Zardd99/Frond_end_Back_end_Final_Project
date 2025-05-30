@@ -18,6 +18,10 @@ const AdminDashboard = () => {
   const [itemToDelete, setItemToDelete] = useState(null);
   const [activeTab, setActiveTab] = useState("users");
 
+  //
+  // Fetch Users
+  //
+  //
   useEffect(() => {
     const fetchUsers = async () => {
       if (user?.role !== "Admin") return;
@@ -73,8 +77,30 @@ const AdminDashboard = () => {
   //
   //
   const updateRole = async (userId, newRole) => {
+    const SUPER_ADMIN = import.meta.env.VITE_SUPER_ADMIN;
+    const currentUserEmail = user?.email;
+    const targetUser = users.find((u) => u.user_id === userId);
+
     if (userId === user?.id) {
-      alert("You cannot modify your own role");
+      setError("Cannot change your own role.", error);
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+      return;
+    }
+
+    if (targetUser?.email === SUPER_ADMIN) {
+      setError("Cannot change others role.");
+      setTimeout(() => setError(""), 3000);
+      return;
+    }
+
+    if (
+      currentUserEmail !== SUPER_ADMIN &&
+      targetUser?.role === "Admin" &&
+      newRole !== "Admin"
+    ) {
+      setError("Cannot proceed the action.");
       return;
     }
 
@@ -89,8 +115,7 @@ const AdminDashboard = () => {
         users.map((u) => (u.user_id === userId ? { ...u, role: newRole } : u))
       );
     } catch (err) {
-      setError("Failed to update user role");
-      console.error(err);
+      setError("Failed to update user role", err);
     }
   };
 
@@ -147,7 +172,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex flex-col w-full h-full items-center cal-sans-regular">
-      <div className="p-5"></div>
+      <div className="p-10"></div>
       <div className="bg-light rounded-lg shadow p-6 container">
         <h2 className="text-2xl font-bold mb-4">Admin Dashboard</h2>
 
@@ -174,7 +199,11 @@ const AdminDashboard = () => {
           </button>
         </div>
 
-        {error && <div className="text-bold-red mb-4">{error}</div>}
+        {error && (
+          <div className="text-hero-red-600 bg-hero-white/80 backdrop-blur-xl border border-hero-gray-100/20 rounded-3xl p-5  mb-4 absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] shadow-2xl shadow-black/5">
+            {error}
+          </div>
+        )}
 
         {activeTab === "users" &&
           (loading.users ? (
@@ -199,13 +228,13 @@ const AdminDashboard = () => {
                       <td className="p-3">
                         <select
                           value={userData.role}
-                          onChange={(e) =>
-                            updateRole(userData.user_id, e.target.value)
-                          }
+                          onChange={(e) => {
+                            updateRole(userData.user_id, e.target.value);
+                          }}
                           className="border rounded px-2 py-1"
-                          disabled={userData.user_id === user.id}
+                          // disabled={userData.user_id === user.id}
                         >
-                          <option value="User">User</option>
+                          <option value="User">user</option>
                           <option value="Admin">Admin</option>
                         </select>
                       </td>

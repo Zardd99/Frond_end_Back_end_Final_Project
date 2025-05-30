@@ -15,7 +15,7 @@ const ProfileInformation = forwardRef(({ isEmailVisible, isAdmin }, ref) => {
     e.preventDefault();
     try {
       await signOut();
-      navigate("/dashboard");
+      navigate("/");
     } catch (err) {
       console.error(err);
     }
@@ -60,7 +60,7 @@ const ProfileInformation = forwardRef(({ isEmailVisible, isAdmin }, ref) => {
       <div
         className={`cal-sans-bold mr-4 p-4 rounded-2xl text-bold-red hover:text-bold-red-hover`}
       >
-        <Link to="/dashboard/dashboard">Go to dashboard</Link>
+        <Link to="/dashboard">Go to dashboard</Link>
       </div>
       <div className="cal-sans-bold mr-4 p-4 rounded-2xl flex w-full justify-end items-end">
         <button
