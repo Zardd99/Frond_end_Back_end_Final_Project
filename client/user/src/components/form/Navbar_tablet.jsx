@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar_tablet = forwardRef(({ isNavbarVisible, links }, ref) => {
   //
@@ -30,6 +31,12 @@ const Navbar_tablet = forwardRef(({ isNavbarVisible, links }, ref) => {
       ref={ref}
       id="navbar_link"
     >
+      <Link
+        to="/"
+        className="flex cal-sans-bold text-2xl bg-gradient-to-r from-offer-purple-600 via-offer-cool-600 to-offer-emerald-600 bg-clip-text text-transparent hover:from-offer-purple-700 hover:via-offer-cool-700 hover:to-offer-emerald-700 transition-all duration-300 transform hover:scale-105"
+      >
+        Welcome
+      </Link>
       {links.map((link) => (
         <a
           className="group flex items-center justify-between pr-5 "

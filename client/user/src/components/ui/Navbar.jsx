@@ -211,7 +211,7 @@ const Navbar = () => {
         <div className="group flex items-center justify-center">
           <Link
             to="/"
-            className="cal-sans-bold text-2xl bg-gradient-to-r from-offer-purple-600 via-offer-cool-600 to-offer-emerald-600 bg-clip-text text-transparent hover:from-offer-purple-700 hover:via-offer-cool-700 hover:to-offer-emerald-700 transition-all duration-300 transform hover:scale-105"
+            className="hidden md:flex cal-sans-bold text-2xl bg-gradient-to-r from-offer-purple-600 via-offer-cool-600 to-offer-emerald-600 bg-clip-text text-transparent hover:from-offer-purple-700 hover:via-offer-cool-700 hover:to-offer-emerald-700 transition-all duration-300 transform hover:scale-105"
           >
             Welcome
           </Link>
@@ -230,7 +230,7 @@ const Navbar = () => {
         </div>
 
         {!isAuthPage && (
-          <div className="flex justify-end md:justify-center w-full">
+          <div className="flex w-full">
             <nav
               className={`Navbar_link cal-sans-regular hidden md:flex items-center space-x-1 bg-hero-gray-50/60 backdrop-blur-sm rounded-2xl px-3 py-2 border border-hero-gray-200/30`}
               id="navbar_link"
@@ -274,6 +274,7 @@ const Navbar = () => {
         {/*  */}
         {/* tablet-screen navbar */}
         {/*  */}
+
         <div
           className={`absolute top-20 right-8 w-80 transition-all duration-300 ease-out ${
             isNavbarVisible
@@ -316,7 +317,7 @@ const Navbar = () => {
               />
             </div>
           ) : (
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col lg:flex-row items-end gap-4">
               <Link
                 to="/login"
                 className="px-6 py-2 text-sm font-medium text-hero-gray-700 hover:text-offer-purple-600 transition-colors duration-300 relative group"
