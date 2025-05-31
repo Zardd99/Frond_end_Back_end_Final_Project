@@ -171,7 +171,7 @@ const AdminDashboard = () => {
   if (user?.role !== "Admin") return null;
 
   return (
-    <div className="flex flex-col w-full h-full items-center cal-sans-regular">
+    <div className="flex flex-col w-full h-full items-center cal-sans-regular pt-20">
       <div className="p-10"></div>
       <div className="bg-light rounded-lg shadow p-6 container">
         <h2 className="text-2xl font-bold mb-4">Admin Dashboard</h2>
@@ -180,8 +180,8 @@ const AdminDashboard = () => {
           <button
             className={`py-2 px-4 font-medium ${
               activeTab === "users"
-                ? "border-b-2 border-bold-red text-bold-red"
-                : "text-regular"
+                ? "border-b-2 border-hero-red-400 text-hero-red-500"
+                : "text-hero-gray-800"
             }`}
             onClick={() => setActiveTab("users")}
           >
@@ -190,8 +190,8 @@ const AdminDashboard = () => {
           <button
             className={`py-2 px-4 font-medium ${
               activeTab === "menu"
-                ? "border-b-2 border-bold-red text-bold-red"
-                : "text-regular"
+                ? "border-b-2 border-hero-red-400 text-hero-red-500"
+                : "text-hero-gray-800"
             }`}
             onClick={() => setActiveTab("menu")}
           >
@@ -222,7 +222,7 @@ const AdminDashboard = () => {
                   {users.map((userData) => (
                     <tr
                       key={userData.user_id}
-                      className="border-b hover:bg-regular-hover"
+                      className="border-b hover:bg-hero-gray-400"
                     >
                       <td className="p-3">{userData.email}</td>
                       <td className="p-3">
@@ -242,8 +242,8 @@ const AdminDashboard = () => {
                         <span
                           className={`px-2 py-1 rounded-full text-xs ${
                             userData.banned
-                              ? "bg-light-red text-red"
-                              : "bg-light-green text-green"
+                              ? "bg-hero-red-300 text-hero-red-600"
+                              : "bg-offer-fresh-300 text-offer-fresh-700"
                           }`}
                         >
                           {userData.banned ? "Banned" : "Active"}
@@ -261,7 +261,7 @@ const AdminDashboard = () => {
             <div className="flex justify-end mb-4">
               <button
                 onClick={() => setShowInsertForm(true)}
-                className="bg-bold-red text-light px-4 py-2 rounded-lg hover:bg-bold-red-hover"
+                className="bg-hero-red-300 text-light px-4 py-2 rounded-lg hover:bg-bold-red-hover"
               >
                 Add Menu Item
               </button>
@@ -284,7 +284,7 @@ const AdminDashboard = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        className="size-6 text-bold-red hover:text-bold-red-hover"
+                        className="size-6 text-hero-red-500 hover:text-hero-red-400"
                       >
                         <path
                           fillRule="evenodd"
@@ -304,7 +304,7 @@ const AdminDashboard = () => {
                     <h2 className="cal-sans-bold text-2xl mb-2">
                       {item.title}
                     </h2>
-                    <p className="cal-sans-bold text-bold-red text-xl mb-4">
+                    <p className="cal-sans-bold text-hero-red-500 text-xl mb-4">
                       {item.price_tag}
                     </p>
                     <p className="text-dark mb-4">{item.description}</p>
@@ -318,7 +318,7 @@ const AdminDashboard = () => {
 
       {showInsertForm && (
         <div className="fixed inset-0 bg-dark bg-opacity-50 flex items-center justify-center p-4 z-70">
-          <div className="bg-background p-8 rounded-2xl max-w-md w-full">
+          <div className="bg-gradient-to-br from-hero-cyan-200 via-hero-cyan-300 to-hero-cyan-400 p-8 rounded-2xl max-w-md w-full">
             <h2 className="text-2xl mb-4">Add New Menu Item</h2>
             <form onSubmit={handleAddItem}>
               <input

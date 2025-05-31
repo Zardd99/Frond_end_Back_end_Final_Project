@@ -230,7 +230,7 @@ const Navbar = () => {
         </div>
 
         {!isAuthPage && (
-          <div className="flex w-full">
+          <div className="flex w-full md:justify-center">
             <nav
               className={`Navbar_link cal-sans-regular hidden md:flex items-center space-x-1 bg-hero-gray-50/60 backdrop-blur-sm rounded-2xl px-3 py-2 border border-hero-gray-200/30`}
               id="navbar_link"
