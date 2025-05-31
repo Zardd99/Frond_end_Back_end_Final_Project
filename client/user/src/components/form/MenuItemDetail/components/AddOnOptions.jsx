@@ -1,7 +1,7 @@
 import React from "react";
 
 const AddOnOptions = ({ addOns, selectedAddOns, onToggleAddOn }) => (
-  <div className="mb-8">
+  <div className="mb-8 w-full">
     <h3 className="cal-sans-bold text-xl mb-4 text-foodle-neutral-800">
       Add-ons
     </h3>

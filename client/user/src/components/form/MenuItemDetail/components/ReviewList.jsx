@@ -10,14 +10,14 @@ const ReviewList = ({
 }) => {
   if (comments.length === 0) {
     return (
-      <p className="text-center text-regular py-8">
+      <p className="cal-sans-regular text-center text-regular py-8">
         No reviews yet. Be the first to review this item!
       </p>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 ">
       {comments.map((comment) => (
         <ReviewItem
           key={comment.id}

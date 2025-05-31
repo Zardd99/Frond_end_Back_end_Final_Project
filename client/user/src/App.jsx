@@ -21,7 +21,6 @@ function App() {
     <>
       <div className="bg-background">
         <div className="flex flex-col container mx-auto">
-          <div className="my-4"></div>
           <Navbar />
         </div>
       </div>
@@ -30,14 +29,10 @@ function App() {
         <ErrorBoundary>
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/dashboard" element={<Home />} /> */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Sign_Up />} />
             <Route path="/allmenu" element={<AllMenu />} />
-            <Route
-              path="/dashboard/menu/:itemId"
-              element={<MenuItemDetail />}
-            />
+            <Route path="/menu/:itemId" element={<MenuItemDetail />} />
 
             <Route element={<PrivateRoute allowedRoles={["user", "Admin"]} />}>
               <Route path="/dashboard" element={<DashboardLayout />} />

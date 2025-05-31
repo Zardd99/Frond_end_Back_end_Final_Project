@@ -1,6 +1,10 @@
 import Icon_Img from "../../assets/Hero_img.png";
 import FastFood from "../../assets/Burgur.png";
 
+import Emoji_1 from "../../assets/paimon-s-paintings-set-35-2.png";
+import Emoji_2 from "../../assets/paimon-s-paintings-set-35-4.png";
+import Emoji_3 from "../../assets/paimon-s-paintings-set-35-6.png";
+
 const OFFER_CONTENTS = [
   {
     title: "Fast Delivery",
@@ -12,6 +16,7 @@ const OFFER_CONTENTS = [
     iconBg: "bg-gradient-to-br from-offer-primary-100 to-offer-primary-200",
     hoverGradient:
       "group-hover:from-offer-primary-400 group-hover:to-offer-accent-500",
+    emoji: Emoji_1,
   },
   {
     title: "Fresh Food",
@@ -23,6 +28,7 @@ const OFFER_CONTENTS = [
     iconBg: "bg-gradient-to-br from-offer-fresh-100 to-offer-fresh-200",
     hoverGradient:
       "group-hover:from-offer-fresh-400 group-hover:to-offer-emerald-500",
+    emoji: Emoji_2,
   },
   {
     title: "Free Delivery",
@@ -34,13 +40,14 @@ const OFFER_CONTENTS = [
     iconBg: "bg-gradient-to-br from-offer-cool-100 to-offer-cool-200",
     hoverGradient:
       "group-hover:from-offer-cool-400 group-hover:to-offer-purple-500",
+    emoji: Emoji_3,
   },
 ];
 
 const Offer = () => {
   return (
     <section
-      className="Offer relative container mx-auto px-4 py-20 -mt-16 z-10 hover:shadow-lg rounded-[25px] transition-all duration-1000"
+      className="Offer relative container mx-auto px-4 py-20 -mt-16 z-10"
       id="offer"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-offer-neutral-50 via-offer-bg-light to-offer-neutral-100 rounded-3xl opacity-60 blur-3xl"></div>
@@ -86,14 +93,18 @@ const Offer = () => {
 
               <div className="text-center relative z-10">
                 <h3
-                  className={`cal-sans-bold text-2xl mb-4 text-offer-neutral-800 group-hover:bg-gradient-to-r ${content.hoverGradient} group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300`}
+                  className={`cal-sans-bold text-2xl mb-4 text-offer-neutral-800 group-hover:bg-gradient-to-r ${content.hoverGradient} group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300 text-base lg:text-lg 2xl:text-3xl`}
                 >
                   {content.title}
                 </h3>
 
-                <p className="cal-sans-regular text-offer-neutral-600 leading-relaxed group-hover:text-offer-neutral-700 transition-colors duration-300">
+                <p className="cal-sans-regular text-offer-neutral-600 leading-relaxed group-hover:text-offer-neutral-700 transition-colors duration-300 text-xs lg:text-base 2xl:text-xl">
                   {content.description}
                 </p>
+              </div>
+
+              <div className="absolute top-0 left-0 w-20 h-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <img src={content.emoji} className="object-contain"></img>
               </div>
 
               <div

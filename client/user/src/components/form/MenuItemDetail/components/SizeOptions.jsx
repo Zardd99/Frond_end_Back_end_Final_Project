@@ -1,7 +1,7 @@
 import React from "react";
 
 const SizeOptions = ({ sizes, selectedSize, onSelectSize, basePrice }) => (
-  <div className="mb-6">
+  <div className="mb-6 w-full">
     <h3 className="cal-sans-bold text-lg mb-3">Size</h3>
     <div className="grid grid-cols-2 gap-2">
       {sizes.map((size) => (

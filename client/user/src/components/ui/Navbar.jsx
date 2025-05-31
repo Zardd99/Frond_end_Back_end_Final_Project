@@ -15,6 +15,8 @@ import ProfileImg from "../../assets/profile_picture.jpg";
 import Navbar_tablet from "../form/Navbar_tablet";
 import ProfileInformation from "../form/ProfileInformation";
 
+import Emoji_1 from "../../assets/paimon-s-paintings-set-35-2.png";
+
 const Navbar = () => {
   const location = useLocation();
   const { session } = UserAuth();
@@ -185,7 +187,7 @@ const Navbar = () => {
 
   return (
     <header
-      className={`Navbar fixed top-0 left-[50%] z-50 bg-hero-white/80 backdrop-blur-xl border border-hero-gray-100/20 rounded-3xl w-[95%] max-w-7xl shadow-2xl shadow-black/5 transition-all duration-500 ease-out ${
+      className={`Navbar fixed top-0 left-[50%] z-50 bg-hero-white/80 backdrop-blur-xl border border-hero-gray-100/20 rounded-3xl w-[95%] max-w-7xl shadow-2xl shadow-black/5 transition-all duration-500 ease-out  ${
         isNavbarHidden
           ? "-translate-y-full opacity-0"
           : "translate-y-0 opacity-100"
@@ -206,12 +208,26 @@ const Navbar = () => {
       )}
 
       <div className="container flex justify-between items-center px-8 py-4 mx-auto">
-        <Link
-          to="/"
-          className="cal-sans-bold text-2xl bg-gradient-to-r from-offer-purple-600 via-offer-cool-600 to-offer-emerald-600 bg-clip-text text-transparent hover:from-offer-purple-700 hover:via-offer-cool-700 hover:to-offer-emerald-700 transition-all duration-300 transform hover:scale-105"
-        >
-          Welcome
-        </Link>
+        <div className="group flex items-center justify-center">
+          <Link
+            to="/"
+            className="cal-sans-bold text-2xl bg-gradient-to-r from-offer-purple-600 via-offer-cool-600 to-offer-emerald-600 bg-clip-text text-transparent hover:from-offer-purple-700 hover:via-offer-cool-700 hover:to-offer-emerald-700 transition-all duration-300 transform hover:scale-105"
+          >
+            Welcome
+          </Link>
+          <div className="hidden md:flex items-center justify-center w-20 h-20 ml-10 gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ">
+            <img src={Emoji_1} alt="" />
+            <span className="text-hero-cyan-900 font-medium cal-sans-bold hidden lg:flex">
+              {session?.user?.email ? (
+                <>
+                  {session.user.email.slice(0, 2)}
+                  <span className="mx-1">...</span>
+                  {session.user.email.split("@")[0].slice(-1)}
+                </>
+              ) : null}
+            </span>
+          </div>
+        </div>
 
         {!isAuthPage && (
           <div className="flex justify-end md:justify-center w-full">
@@ -224,7 +240,7 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={handleScrollToSection(link.href.substring(1))}
-                  className="relative px-4 py-2 text-sm font-medium text-hero-gray-700 rounded-xl hover:text-hero-white hover:bg-gradient-to-r hover:from-offer-purple-500 hover:to-offer-cool-500 transition-all duration-300 ease-out transform hover:scale-105 hover:shadow-lg group"
+                  className="relative px-4 py-2 text-3xs lg:text-sm font-medium text-hero-gray-700 rounded-xl hover:text-hero-white hover:bg-gradient-to-r hover:from-offer-purple-500 hover:to-offer-cool-500 transition-all duration-300 ease-out transform hover:scale-105 hover:shadow-lg group"
                 >
                   <span className="relative z-10">{link.name}</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-offer-purple-400/20 to-offer-cool-400/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
@@ -233,7 +249,7 @@ const Navbar = () => {
             </nav>
 
             <button
-              className="flex md:hidden items-center justify-center w-12 h-12 bg-gradient-to-br from-hero-gray-50 to-hero-gray-100 hover:from-offer-purple-50 hover:to-offer-cool-50 rounded-2xl shadow-lg border border-hero-gray-200/50 transition-all duration-300 ease-out transform hover:scale-110 hover:shadow-xl active:scale-95"
+              className="flex mr-4 xs: md:hidden items-center justify-center w-12 h-12 bg-gradient-to-br from-hero-gray-50 to-hero-gray-100 hover:from-offer-purple-50 hover:to-offer-cool-50 rounded-2xl shadow-lg border border-hero-gray-200/50 transition-all duration-300 ease-out transform hover:scale-110 hover:shadow-xl active:scale-95"
               onClick={handleNavbar}
               ref={navbarButtonRef}
             >
@@ -287,7 +303,6 @@ const Navbar = () => {
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-offer-purple-400/20 to-offer-cool-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-offer-fresh-400 border-2 border-light rounded-full shadow-sm"></div>
               </button>
 
               {/* */}
@@ -301,7 +316,7 @@ const Navbar = () => {
               />
             </div>
           ) : (
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center gap-4">
               <Link
                 to="/login"
                 className="px-6 py-2 text-sm font-medium text-hero-gray-700 hover:text-offer-purple-600 transition-colors duration-300 relative group"
@@ -311,9 +326,9 @@ const Navbar = () => {
               </Link>
               <Link
                 to="/signup"
-                className="px-6 py-2 text-sm font-medium text-light bg-gradient-to-r from-offer-purple-500 to-offer-cool-500 hover:from-offer-purple-600 hover:to-offer-cool-600 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 ease-out transform hover:scale-105 active:scale-95 border border-offer-purple-400/30"
+                className="w-50 hover:w-60 px-6 py-2 flex text-sm font-medium text-light bg-gradient-to-r from-offer-purple-500 to-offer-cool-500 hover:from-offer-purple-600 hover:to-offer-cool-600 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 ease-out transform hover:scale-105 active:scale-95 border border-offer-purple-400/30"
               >
-                Sign Up
+                <span className="">Sign Up</span>
               </Link>
             </div>
           )}

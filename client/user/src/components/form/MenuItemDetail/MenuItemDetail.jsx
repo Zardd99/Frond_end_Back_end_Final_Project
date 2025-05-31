@@ -326,7 +326,7 @@ const MenuItemDetail = () => {
           <p className="text-gray-500">Menu item not found</p>
           <Link
             to="/"
-            className="cal-sans-bold text-bold-red hover:underline mt-4 inline-block"
+            className="cal-sans-bold text-hero-red-600 hover:underline mt-4 inline-block"
           >
             &larr; Back to Menu
           </Link>
@@ -336,182 +336,189 @@ const MenuItemDetail = () => {
   }
 
   return (
-    <ErrorBoundary>
-      <div className="p-10"></div>
-      <div className="container mx-auto p-4 lg:p-8">
-        <div className="mb-6">
-          <Link to="/" className="cal-sans-bold text-bold-red hover:underline">
-            &larr; Back to Menu
-          </Link>
-        </div>
+    <section className="mx-auto min-w-screen min-h-screen flex items-center pt-20 md:pt-30">
+      <ErrorBoundary>
+        <div className="p-10"></div>
+        <div className="container mx-auto p-4 lg:p-8 w-full">
+          <div className="mb-6">
+            <Link
+              to="/"
+              className="cal-sans-bold text-hero-red-600 hover:underline"
+            >
+              &larr; Back to Menu
+            </Link>
+          </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-          <div className="lg:col-span-1">
-            <div className="bg-light rounded-2xl overflow-hidden shadow-lg h-full">
-              {menuItem.image_url ? (
-                <img
-                  src={menuItem.image_url}
-                  alt={menuItem.name}
-                  className="w-full h-full object-contain"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.parentNode.innerHTML = `
-                      <div class="bg-light border-2 border-dashed rounded-xl w-full h-64 flex items-center justify-center text-regular">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <div className="lg:col-span-1">
+              <div className="bg-light rounded-2xl overflow-hidden shadow-lg h-full">
+                {menuItem.image_url ? (
+                  <img
+                    src={menuItem.image_url}
+                    alt={menuItem.name}
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.parentNode.innerHTML = `
+                      <div class="bg-light border-2 border-dashed rounded-xl w-full h-64 flex items-center justify-center text-hero-gray-700">
                         Image not available
                       </div>
                     `;
-                  }}
-                />
-              ) : (
-                <div className="bg-regular-hover border-2 border-dashed rounded-xl w-full h-64 flex items-center justify-center text-regular">
-                  No image available
-                </div>
-              )}
+                    }}
+                  />
+                ) : (
+                  <div className="bg-regular-hover border-2 border-dashed rounded-xl w-full h-64 flex items-center justify-center text-hero-gray-700">
+                    No image available
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
 
-          <ProductDetails
-            menuItem={menuItem}
-            totalPrice={totalPrice}
-            quantity={quantity}
-          >
-            <SizeOptions
-              sizes={SIZE_OPTIONS}
-              selectedSize={selectedSize}
-              onSelectSize={(size) => updateState({ selectedSize: size })}
-              basePrice={parseFloat(menuItem.price_tag.replace("$", "")) || 0}
-            />
-
-            <AddOnOptions
-              addOns={ADD_ON_OPTIONS}
-              selectedAddOns={selectedAddOns}
-              onToggleAddOn={handleAddOnToggle}
-            />
-
-            <QuantitySelector
+            <ProductDetails
+              menuItem={menuItem}
+              totalPrice={totalPrice}
               quantity={quantity}
-              onQuantityChange={(qty) => updateState({ quantity: qty })}
-            />
-
-            <div className="space-y-4 flex flex-col w-fit">
-              <button
-                onClick={handleAddToCart}
-                disabled={isAddingToCart || !menuItem}
-                className="group relative overflow-hidden bg-gradient-to-r from-hero-orange-500 to-hero-red-500 hover:from-hero-orange-600 hover:to-hero-red-600 text-hero-white font-semibold px-8 py-4 rounded-full shadow-2xl hover:shadow-[0_10px_30px_rgba(249,115,22,0.25)] transition-all duration-300 transform hover:scale-105"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="bg-hero-white/20 backdrop-blur-sm p-2 rounded-full group-hover:rotate-12 transition-transform duration-300">
-                    <svg
-                      className="w-5 h-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-                      />
-                    </svg>
-                  </div>
-                  <span className="text-lg">
-                    {" "}
-                    {isAddingToCart ? "Adding..." : "Add to Cart"}
-                  </span>
-                </div>
-                <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
-              </button>
-
-              <button
-                onClick={handleBuyNow}
-                disabled={isAddingToCart || isOrderProcessing || !menuItem}
-                className="group relative overflow-hidden bg-gradient-to-r from-offer-fresh-500 to-offer-cool-500 hover:from-offer-fresh-600 hover:to-offer-cool-600 text-hero-white font-semibold px-8 py-4 rounded-full shadow-2xl hover:shadow-[0_10px_30px_rgba(249,115,22,0.25)] transition-all duration-300 transform hover:scale-105"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="bg-hero-white/20 backdrop-blur-sm p-2 rounded-full group-hover:rotate-12 transition-transform duration-300">
-                    <svg
-                      className="w-5 h-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-                      />
-                    </svg>
-                  </div>
-                  <span className="text-lg">
-                    {isOrderProcessing ? "Processing..." : "Buy Now"}
-                  </span>
-                </div>
-                <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
-              </button>
-            </div>
-          </ProductDetails>
-
-          {/*  */}
-          {/* Order Notify */}
-          {/*  */}
-          {notification && (
-            <div
-              className={`mb-4 p-4 rounded-lg ${
-                notification.type === "error"
-                  ? "bg-light-red text-red border border-light-red"
-                  : notification.type === "warning"
-                  ? "bg-yellow-light text-yellow-dark border border-yellow-light"
-                  : "bg-light-green text-green border border-light-green"
-              }`}
             >
-              {notification.message}
-            </div>
-          )}
-        </div>
+              <SizeOptions
+                sizes={SIZE_OPTIONS}
+                selectedSize={selectedSize}
+                onSelectSize={(size) => updateState({ selectedSize: size })}
+                basePrice={parseFloat(menuItem.price_tag.replace("$", "")) || 0}
+              />
 
-        {/* Reviews */}
-        <div className="bg-gradient-to-r from-hero-orange-50 to-hero-red-100 rounded-3xl p-6 lg:p-8">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="cal-sans-bold text-2xl lg:text-3xl">
-              Customer Reviews
-            </h2>
-            {session && (
-              <button
-                onClick={() => updateState({ showReviewForm: !showReviewForm })}
-                className="group flex items-center gap-3 font-semibold px-6 py-2 bg-hero-red-500 text-light hover:bg-hero-white/50 rounded-full transition-all duration-300 backdrop-blur-sm"
+              <AddOnOptions
+                addOns={ADD_ON_OPTIONS}
+                selectedAddOns={selectedAddOns}
+                onToggleAddOn={handleAddOnToggle}
+              />
+
+              <QuantitySelector
+                quantity={quantity}
+                onQuantityChange={(qty) => updateState({ quantity: qty })}
+              />
+
+              <div className="space-y-4 flex flex-col w-fit">
+                <button
+                  onClick={handleAddToCart}
+                  disabled={isAddingToCart || !menuItem}
+                  className="group relative overflow-hidden bg-gradient-to-r from-hero-orange-500 to-hero-red-500 hover:from-hero-orange-600 hover:to-hero-red-600 text-hero-white font-semibold px-8 py-4 rounded-full shadow-2xl hover:shadow-[0_10px_30px_rgba(249,115,22,0.25)] transition-all duration-300 transform hover:scale-105"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="bg-hero-white/20 backdrop-blur-sm p-2 rounded-full group-hover:rotate-12 transition-transform duration-300">
+                      <svg
+                        className="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                        />
+                      </svg>
+                    </div>
+                    <span className="text-lg">
+                      {" "}
+                      {isAddingToCart ? "Adding..." : "Add to Cart"}
+                    </span>
+                  </div>
+                  <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
+                </button>
+
+                <button
+                  onClick={handleBuyNow}
+                  disabled={isAddingToCart || isOrderProcessing || !menuItem}
+                  className="group relative overflow-hidden bg-gradient-to-r from-offer-fresh-500 to-offer-cool-500 hover:from-offer-fresh-600 hover:to-offer-cool-600 text-hero-white font-semibold px-8 py-4 rounded-full shadow-2xl hover:shadow-[0_10px_30px_rgba(249,115,22,0.25)] transition-all duration-300 transform hover:scale-105"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="bg-hero-white/20 backdrop-blur-sm p-2 rounded-full group-hover:rotate-12 transition-transform duration-300">
+                      <svg
+                        className="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                        />
+                      </svg>
+                    </div>
+                    <span className="text-lg">
+                      {isOrderProcessing ? "Processing..." : "Buy Now"}
+                    </span>
+                  </div>
+                  <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
+                </button>
+              </div>
+            </ProductDetails>
+
+            {/*  */}
+            {/* Order Notify */}
+            {/*  */}
+            {notification && (
+              <div
+                className={`mb-4 p-4 rounded-lg ${
+                  notification.type === "error"
+                    ? "bg-hero-red-100 text-hero-red-500 border border-hero-red-100"
+                    : notification.type === "warning"
+                    ? "bg-hero-yellow-100 text-hero-red-600 border border-hero-yellow-100"
+                    : "bg-offer-fresh-500 text-hero-gray-900 border border-offer-fresh-50"
+                }`}
               >
-                <span className="text-lg group-hover:text-hero-orange-600 transition-colors duration-300">
-                  {showReviewForm ? "Hide Form" : "Write Review"}
-                </span>
-              </button>
+                {notification.message}
+              </div>
             )}
           </div>
 
-          {showReviewForm && session && (
-            <ReviewForm
-              onSubmit={handleSubmitReview}
-              onCancel={() => updateState({ showReviewForm: false })}
-              rating={newRating}
-              setRating={(rating) => updateState({ newRating: rating })}
-              comment={newComment}
-              setComment={(comment) => updateState({ newComment: comment })}
-            />
-          )}
+          {/* Reviews */}
+          <div className="bg-gradient-to-r from-hero-orange-50 to-hero-red-100 rounded-3xl p-6 lg:p-8">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="cal-sans-bold text-2xl lg:text-3xl">
+                Customer Reviews
+              </h2>
+              {session && (
+                <button
+                  onClick={() =>
+                    updateState({ showReviewForm: !showReviewForm })
+                  }
+                  className="group flex items-center gap-3 font-semibold px-6 py-2 bg-hero-red-500 text-light hover:bg-hero-white/50 rounded-full transition-all duration-300 backdrop-blur-sm"
+                >
+                  <span className="text-lg group-hover:text-hero-orange-600 transition-colors duration-300">
+                    {showReviewForm ? "Hide Form" : "Write Review"}
+                  </span>
+                </button>
+              )}
+            </div>
 
-          <ReviewList
-            comments={comments}
-            onDelete={handleDeleteReview}
-            onUpdate={handleUpdateReview}
-            isAdmin={isAdmin}
-            currentUserId={session?.user.id}
-          />
+            {showReviewForm && session && (
+              <ReviewForm
+                onSubmit={handleSubmitReview}
+                onCancel={() => updateState({ showReviewForm: false })}
+                rating={newRating}
+                setRating={(rating) => updateState({ newRating: rating })}
+                comment={newComment}
+                setComment={(comment) => updateState({ newComment: comment })}
+              />
+            )}
+
+            <ReviewList
+              comments={comments}
+              onDelete={handleDeleteReview}
+              onUpdate={handleUpdateReview}
+              isAdmin={isAdmin}
+              currentUserId={session?.user.id}
+            />
+          </div>
         </div>
-      </div>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </section>
   );
 };
 

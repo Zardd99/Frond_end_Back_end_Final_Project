@@ -6,7 +6,7 @@ const QuantitySelector = ({ quantity, onQuantityChange }) => (
     <div className="flex items-center space-x-4">
       <button
         onClick={() => onQuantityChange(Math.max(1, quantity - 1))}
-        className="w-10 h-10 flex items-center justify-center rounded-full border-2 border-bold-red text-bold-red hover:bg-bold-red hover:text-light transition-colors"
+        className="w-10 h-10 flex items-center justify-center rounded-full border-2 border-hero-orange-500 text-hero-orange-500 hover:bg-hero-orange-500 hover:text-light transition-colors"
         disabled={quantity <= 1}
       >
         -
@@ -14,7 +14,7 @@ const QuantitySelector = ({ quantity, onQuantityChange }) => (
       <span className="text-xl font-medium w-8 text-center">{quantity}</span>
       <button
         onClick={() => onQuantityChange(quantity + 1)}
-        className="w-10 h-10 flex items-center justify-center rounded-full border-2 border-bold-red text-bold-red hover:bg-bold-red hover:text-light transition-colors"
+        className="w-10 h-10 flex items-center justify-center rounded-full border-2 border-hero-orange-500 text-hero-orange-500 hover:bg-hero-orange-500 hover:text-light transition-colors"
       >
         +
       </button>

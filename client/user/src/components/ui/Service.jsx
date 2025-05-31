@@ -177,16 +177,16 @@ const Service = () => {
               {[...Array(3)].map((_, i) => (
                 <div
                   key={i}
-                  className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-red-400 border-2 border-white shadow-lg"
+                  className="w-5 h-5 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-orange-400 to-red-400 border-2 border-white shadow-lg"
                   style={{ animationDelay: `${i * 100}ms` }}
                 ></div>
               ))}
             </div>
             <div className="text-left">
-              <p className="cal-sans-regular text-foodle-neutral-800">
+              <p className="cal-sans-regular text-foodle-neutral-800 text-sm md:text-base">
                 Join 10,000+ happy customers
               </p>
-              <p className="cal-sans-regular text-foodle-neutral-600 text-sm">
+              <p className="cal-sans-regular text-foodle-neutral-600 text-xs md:text-sm">
                 Experience the taste of perfection
               </p>
             </div>

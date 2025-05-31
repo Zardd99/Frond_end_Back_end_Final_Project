@@ -45,12 +45,12 @@ const Sign_Up = () => {
   };
 
   return (
-    <div className="Login_Form flex h-screen items-center justify-center bg-background ">
+    <div className="Login_Form flex min-h-screen items-center justify-center bg-gradient-to-br from-hero-slate-900 via-offer-purple-900 to-hero-slate-900 ">
       <form
         onSubmit={handleSignUp}
         className="max-w-md m-auto pt-24 flex items-center flex-col"
       >
-        <h2 className="cal-sans-bold text-3xl">SignUp</h2>
+        <h2 className="cal-sans-bold text-3xl text-light">SignUp</h2>
         <div className="p-3"></div>
         <p className="cal-sans-regular text-xl">
           Already Have An Account?{" "}

@@ -33,6 +33,7 @@ const Hero = () => (
     {/*  */}
     {/* Content */}
     {/*  */}
+    <div className="p-7 lg:p-0"></div>
     <div className="relative container mx-auto px-6 py-20 flex items-center min-h-screen">
       <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
         <div className="space-y-8 z-10">
@@ -40,7 +41,7 @@ const Hero = () => (
             <div key={index} className="space-y-6">
               {/* Header */}
               <div className="space-y-4">
-                <h1 className="cal-sans-bold text-6xl lg:text-7xl font-bold leading-tight">
+                <h1 className="cal-sans-bold text-3xl lg:text-5xl 2xl:text-7xl font-bold leading-tight">
                   <span className="bg-gradient-to-r from-hero-orange-600 to-hero-red-600 bg-clip-text text-transparent">
                     All Fast Food is
                   </span>
@@ -66,10 +67,10 @@ const Hero = () => (
                 When You Crave Delicious Fast Food
               </p>
 
-              <div className="flex flex-wrap gap-6 pt-4">
+              <div className="flex flex-wrap gap-y-4 md:gap-6 pt-4">
                 <Link
                   to="/allmenu"
-                  className="group relative overflow-hidden bg-gradient-to-r from-hero-orange-500 to-hero-red-500 hover:from-hero-orange-600 hover:to-hero-red-600 text-hero-white font-semibold px-8 py-4 rounded-full shadow-2xl hover:shadow-[0_10px_30px_rgba(249,115,22,0.25)] transition-all duration-300 transform hover:scale-105"
+                  className="group relative overflow-hidden bg-gradient-to-r from-hero-orange-500 to-hero-red-500 hover:from-hero-orange-600 hover:to-hero-red-600 text-hero-white font-semibold px-4 py-2 md:px-8 md:py-4 rounded-full shadow-2xl hover:shadow-[0_10px_30px_rgba(249,115,22,0.25)] transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
                 >
                   <div className="flex items-center gap-3">
                     <div className="bg-hero-white/20 backdrop-blur-sm p-2 rounded-full group-hover:rotate-12 transition-transform duration-300">
@@ -88,12 +89,12 @@ const Hero = () => (
                         />
                       </svg>
                     </div>
-                    <span className="text-lg">{content.button}</span>
+                    <span className="text-sm md:text-lg">{content.button}</span>
                   </div>
                   <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
                 </Link>
 
-                <button className="group flex items-center gap-3 text-hero-gray-800 font-semibold px-6 py-4 hover:bg-hero-white/50 rounded-full transition-all duration-300 backdrop-blur-sm">
+                <button className="group flex items-center gap-3 text-hero-gray-800 font-semibold pl-0 pr-4 py-2 md:px-6 md:py-4 hover:bg-hero-white/50 rounded-full transition-all duration-300 backdrop-blur-sm  justify-center">
                   <div className="relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-hero-orange-400 to-hero-red-500 rounded-full scale-110 opacity-20 group-hover:scale-125 transition-transform duration-300"></div>
                     <div className="relative bg-hero-white shadow-lg p-3 rounded-full group-hover:shadow-xl transition-all duration-300">
@@ -111,26 +112,30 @@ const Hero = () => (
                       </svg>
                     </div>
                   </div>
-                  <span className="text-lg group-hover:text-hero-orange-600 transition-colors duration-300">
+                  <span className="text-sm md:text-lg group-hover:text-hero-orange-600 transition-colors duration-300">
                     {content.orderButton}
                   </span>
                 </button>
               </div>
 
-              <div className="flex items-center gap-8 pt-8 text-sm text-hero-gray-600">
+              <div className="flex items-center gap-4 md:gap-8 pt-8 text-sm text-hero-gray-600">
                 <div className="flex items-center gap-2">
                   <div className="flex -space-x-2">
                     <div className="w-8 h-8 bg-gradient-to-r from-hero-orange-400 to-hero-red-500 rounded-full border-2 border-hero-white"></div>
                     <div className="w-8 h-8 bg-gradient-to-r from-hero-red-400 to-hero-pink-500 rounded-full border-2 border-hero-white"></div>
                     <div className="w-8 h-8 bg-gradient-to-r from-hero-yellow-400 to-hero-orange-500 rounded-full border-2 border-hero-white"></div>
                   </div>
-                  <span className="font-medium">10k+ Happy Customers</span>
+                  <span className="font-medium text-2xs md:text-base">
+                    10k+ Happy Customers
+                  </span>
                 </div>
                 <div className="flex items-center gap-1">
                   <div className="flex text-hero-yellow-400">
                     {"★".repeat(5)}
                   </div>
-                  <span className="font-medium">4.9 Rating</span>
+                  <span className="font-medium text-2xs md:text-base">
+                    4.9 Rating
+                  </span>
                 </div>
               </div>
             </div>

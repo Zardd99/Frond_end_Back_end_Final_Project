@@ -7,10 +7,9 @@ import Footer from "../components/ui/Footer";
 
 const Home = () => {
   return (
-    <main className="App mx-auto min-h-screen">
-      <div className="bg-background rounded-b-4xl h-screen ">
-        <div className="flex flex-col mx-auto ">
-          <div className="my-4"></div>
+    <main className="App mx-auto min-h-screen bg-light">
+      <div className=" rounded-b-4xl min-h-screen ">
+        <div className="flex flex-col mx-auto">
           <Hero />
         </div>
       </div>
@@ -18,8 +17,8 @@ const Home = () => {
         <Offer />
         <Service />
         <Menu />
-        <Footer />
       </div>
+      <Footer />
     </main>
   );
 };

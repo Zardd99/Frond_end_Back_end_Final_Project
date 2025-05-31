@@ -47,7 +47,7 @@ const MenuCard = () => {
         {menuItems.map((item) => (
           <Link
             key={item.id}
-            to={`/dashboard/menu/${item.id}`}
+            to={`/menu/${item.id}`}
             className="group bg-gradient-to-br from-hero-orange-50 via-hero-red-50 to-hero-yellow-50 p-6 rounded-3xl shadow-xl shadow-offer-primary-400/20 hover:shadow-[0_10px_30px_rgba(249,115,22,0.25)] transition-all duration-300 transform hover:scale-105 block"
           >
             <div className="h-48 mb-4 rounded-xl flex items-center justify-center">

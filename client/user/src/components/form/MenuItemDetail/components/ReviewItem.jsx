@@ -35,18 +35,20 @@ const ReviewItem = ({
 
   return (
     <div className="p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-      <div className="flex justify-between items-start mb-4">
+      <div className="flex flex-col md:flex-row justify-between items-start mb-4">
         <div>
-          <div className="flex items-center space-x-3 mb-2">
-            <h3 className="font-semibold text-lg">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-0 items-start md:items-center space-x-3 mb-2">
+            <h3 className="text-hero-gray-900 cal-sans-bold font-semibold text-lg">
               {comment.profiles?.email?.split("@")[0] || "Customer"}
             </h3>
             <StarRating rating={comment.rating || 5} />
             {comment.updated_at && (
-              <span className="text-xs text-regular ml-2">(edited)</span>
+              <span className="cal-sans-regular text-xs text-hero-gray-500 ml-2">
+                (edited)
+              </span>
             )}
           </div>
-          <p className="text-sm text-regular">
+          <p className="cal-sans-regular text-sm text-hero-gray-500">
             {new Date(comment.created_at).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
@@ -63,21 +65,23 @@ const ReviewItem = ({
                   setEditText(comment.comment);
                   setEditRating(comment.rating);
                 }}
-                className="text-offer-cool-400 hover:text-offer-cool-500 text-sm px-3 py-1 rounded-lg hover:bg-offer-cool-100 transition-colors"
+                className="cal-sans-regular text-offer-cool-400 hover:text-offer-cool-500 text-sm pl-0 pr-2 md:px-3 py-1 rounded-lg hover:bg-offer-cool-100 transition-colors"
               >
                 Edit
               </button>
             )}
             <button
               onClick={() => onDelete(comment.id, comment.user_id)}
-              className="text-offer-accent-400 hover:text-offer-accent-500 text-sm px-3 py-1 rounded-lg hover:bg-offer-primary-50 transition-colors"
+              className="cal-sans-regular text-offer-accent-400 hover:text-offer-accent-500 text-sm px-3 py-1 rounded-lg hover:bg-offer-primary-50 transition-colors"
             >
               Delete
             </button>
           </div>
         )}
       </div>
-      <p className="text-dark leading-relaxed">{comment.comment}</p>
+      <p className="cal-sans-regular text-hero-gray-900 leading-relaxed">
+        {comment.comment}
+      </p>
     </div>
   );
 };

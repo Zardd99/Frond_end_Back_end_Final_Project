@@ -39,12 +39,12 @@ const Login = () => {
   };
 
   return (
-    <div className="Login_Form flex h-screen items-center justify-center bg-background ">
+    <div className="Login_Form flex h-screen items-center justify-center bg-gradient-to-br from-hero-slate-900 via-offer-cool-900 to-hero-slate-900 ">
       <form
         onSubmit={handleLogin}
         className="max-w-md m-auto pt-24 flex items-center flex-col"
       >
-        <h2 className="cal-sans-bold text-3xl">Log In</h2>
+        <h2 className="cal-sans-bold text-3xl text-light">Log In</h2>
         <p className="cal-sans-regular text-xl">
           Don't Have An Account?{" "}
           <Link to="/signup" className="text-bold-red">

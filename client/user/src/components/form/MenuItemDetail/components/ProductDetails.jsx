@@ -1,5 +1,5 @@
 const ProductDetails = ({ menuItem, totalPrice, quantity, children }) => (
-  <div className="relative lg:col-span-2 bg-gradient-to-br from-hero-orange-50 to-hero-red-50 rounded-3xl p-6 lg:p-8">
+  <div className="w-full relative lg:col-span-2 bg-gradient-to-br from-hero-orange-50 to-hero-red-50 rounded-3xl p-6 lg:p-8">
     <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-hero-orange-200 to-hero-red-300 rounded-full opacity-20 animate-pulse"></div>
     <div
       className="absolute bottom-20 right-20 w-48 h-48 bg-gradient-to-br from-hero-yellow-400 to-hero-orange-500 rounded-full opacity-15 animate-bounce"

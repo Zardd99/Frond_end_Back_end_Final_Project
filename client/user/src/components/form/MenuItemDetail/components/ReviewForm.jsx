@@ -15,14 +15,16 @@ const ReviewForm = ({
     className="mb-8 p-6 bg-gradient-to-br from-offer-accent-50 to-offer-purple-100 rounded-2xl"
   >
     <div className="mb-4">
-      <label className="block text-sm font-medium mb-2">Your Rating</label>
+      <label className="cal-sans-bold block text-sm font-medium mb-2">
+        Your Rating
+      </label>
       <StarRating rating={rating} interactive={true} onRate={setRating} />
     </div>
 
     <textarea
       value={comment}
       onChange={(e) => setComment(e.target.value)}
-      className="w-full p-4 rounded-xl border border-light focus:border-bold-red focus:outline-none mb-4 resize-vertical"
+      className="cal-sans-regular w-full p-4 rounded-xl border border-light focus:border-bold-red focus:outline-none mb-4 resize-vertical"
       placeholder={
         isEditing ? "Edit your review..." : "Share your experience..."
       }
