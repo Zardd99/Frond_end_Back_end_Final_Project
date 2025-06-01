@@ -45,16 +45,24 @@ const Sign_Up = () => {
   };
 
   return (
-    <div className="Login_Form flex min-h-screen items-center justify-center bg-gradient-to-br from-hero-slate-900 via-offer-purple-900 to-hero-slate-900 ">
+    <div className="Login_Form flex min-h-screen w-full items-center justify-center bg-gradient-to-br from-hero-slate-900 via-offer-purple-900 to-hero-slate-900 relative">
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 left-20 w-64 h-64 bg-hero-orange-500 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-hero-red-500 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-hero-cyan-400 rounded-full blur-3xl"></div>
+      </div>
       <form
         onSubmit={handleSignUp}
-        className="max-w-md m-auto pt-24 flex items-center flex-col"
+        className="max-w-3xl m-auto pt-24 px-20 py-10 flex items-center flex-col border rounded-2xl bg-gradient-to-r from-offer-cool-400 via-offer-cool-500 to-offer-cool-600 relative"
       >
-        <h2 className="cal-sans-bold text-3xl text-light">SignUp</h2>
+        <div className="absolute inset-95 w-5 h-5 bg-gradient-to-r from-hero-orange-50 to-hero-orange-300 rounded-full animate-pulse opacity-5"></div>
+        <div className="absolute -inset-4 w-20 h-20 bg-gradient-to-r from-hero-orange-50 to-hero-orange-300 rounded-full animate-pulse opacity-5"></div>
+
+        <h2 className="cal-sans-bold text-3xl text-hero-gray-900">SignUp</h2>
         <div className="p-3"></div>
-        <p className="cal-sans-regular text-xl">
+        <p className="cal-sans-regular text-xl text-hero-gray-800">
           Already Have An Account?{" "}
-          <Link to="/login" className="text-bold-red">
+          <Link to="/login" className="text-hero-red-600 font-bold pl-4">
             Login
           </Link>
         </p>
@@ -83,7 +91,7 @@ const Sign_Up = () => {
           <button
             type="submit"
             disabled={loading}
-            className="mt-6 w-full bg-red-600 p-3 rounded-xl text-light cal-sans-bold"
+            className="mt-5 inline-flex items-center justify-center cal-sans-regular text-lg text-foodle-brand-500 hover:text-hero-gray-900 bg-white hover:bg-gradient-to-r group-hover:from-foodle-brand-500 group-hover:to-foodle-accent-500 px-4 py-2 rounded-2xl border-2 border-current hover:border-transparent transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
           >
             Sign Up
           </button>

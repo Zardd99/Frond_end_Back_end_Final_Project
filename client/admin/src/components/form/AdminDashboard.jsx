@@ -90,7 +90,7 @@ const AdminDashboard = () => {
     }
 
     if (targetUser?.email === SUPER_ADMIN) {
-      setError("Cannot change others role.");
+      setError("Cannot proceed the action.");
       setTimeout(() => setError(""), 3000);
       return;
     }
@@ -171,8 +171,8 @@ const AdminDashboard = () => {
   if (user?.role !== "Admin") return null;
 
   return (
-    <div className="flex flex-col w-full h-full items-center cal-sans-regular pt-20">
-      <div className="p-10"></div>
+    <div className="flex flex-col w-full h-full items-center cal-sans-regular">
+      <div className="p-20"></div>
       <div className="bg-light rounded-lg shadow p-6 container">
         <h2 className="text-2xl font-bold mb-4">Admin Dashboard</h2>
 
@@ -222,7 +222,7 @@ const AdminDashboard = () => {
                   {users.map((userData) => (
                     <tr
                       key={userData.user_id}
-                      className="border-b hover:bg-hero-gray-400"
+                      className="border-b hover:bg-hero-gray-100"
                     >
                       <td className="p-3">{userData.email}</td>
                       <td className="p-3">
@@ -261,7 +261,7 @@ const AdminDashboard = () => {
             <div className="flex justify-end mb-4">
               <button
                 onClick={() => setShowInsertForm(true)}
-                className="bg-hero-red-300 text-light px-4 py-2 rounded-lg hover:bg-bold-red-hover"
+                className="bg-hero-red-500 text-light px-4 py-2 rounded-lg hover:bg-bold-red-hover"
               >
                 Add Menu Item
               </button>
@@ -364,14 +364,14 @@ const AdminDashboard = () => {
               <div className="flex gap-4">
                 <button
                   type="submit"
-                  className="bg-bold-red text-light px-6 py-2 rounded-lg hover:bg-bold-red-hover"
+                  className="bg-hero-red-500 text-light px-6 py-2 rounded-lg hover:bg-bold-red-hover"
                 >
                   Add Item
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowInsertForm(false)}
-                  className="bg-regular text-light px-6 py-2 rounded-lg hover:bg-regular-hover"
+                  className="bg-hero-gray-500 text-light px-6 py-2 rounded-lg hover:bg-regular-hover"
                 >
                   Cancel
                 </button>
@@ -382,8 +382,8 @@ const AdminDashboard = () => {
       )}
 
       {itemToDelete && (
-        <div className="fixed inset-0 bg-dark bg-opacity-50 flex items-center justify-center p-4 z-70">
-          <div className="bg-background p-8 rounded-2xl max-w-md w-full">
+        <div className="fixed inset-0  flex items-center justify-center p-4 z-70">
+          <div className="bg-hero-gray-200 p-8 rounded-2xl max-w-md w-full">
             <h2 className="text-2xl mb-4">Delete Menu Item?</h2>
             <p className="mb-6">
               Are you sure you want to delete this item? This action cannot be
@@ -391,13 +391,13 @@ const AdminDashboard = () => {
             </p>
             <div className="flex gap-4">
               <button
-                className="bg-bold-red text-light px-6 py-2 rounded-lg hover:bg-bold-red-hover"
+                className="bg-hero-red-600 text-hero-gray-200 px-6 py-2 rounded-lg hover:bg-bold-red-hover"
                 onClick={handleDeleteItem}
               >
                 Delete
               </button>
               <button
-                className="bg-regular text-light px-6 py-2 rounded-lg hover:bg-regular-hover"
+                className="bg-hero-gray-300 text-hero-gray-900 px-6 py-2 rounded-lg hover:bg-regular-hover"
                 onClick={() => setItemToDelete(null)}
               >
                 Cancel
