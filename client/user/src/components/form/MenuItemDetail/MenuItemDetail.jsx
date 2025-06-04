@@ -482,7 +482,7 @@ const MenuItemDetail = () => {
               <h2 className="cal-sans-bold text-2xl lg:text-3xl">
                 Customer Reviews
               </h2>
-              {session && (
+              {session ? (
                 <button
                   onClick={() =>
                     updateState({ showReviewForm: !showReviewForm })
@@ -493,6 +493,13 @@ const MenuItemDetail = () => {
                     {showReviewForm ? "Hide Form" : "Write Review"}
                   </span>
                 </button>
+              ) : (
+                <Link
+                  className="group flex items-center gap-3 font-semibold px-6 py-2 bg-hero-red-500 text-light hover:bg-hero-white/50 rounded-full transition-all duration-300 backdrop-blur-sm"
+                  to="/login"
+                >
+                  Create and Account or Login to Review
+                </Link>
               )}
             </div>
 
