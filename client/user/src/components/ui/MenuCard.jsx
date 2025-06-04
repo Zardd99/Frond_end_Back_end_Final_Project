@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../../../../../server/middleware/supabaseClient";
 
-const MenuCard = () => {
+const MenuCard = ({ allMenuPage }) => {
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -41,10 +41,13 @@ const MenuCard = () => {
           {error}
         </div>
       )}
-
       <h1 className="cal-sans-bold text-4xl mb-8">Our Menu</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {menuItems.map((item) => (
+      <div
+        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ${
+          allMenuPage ? "" : "max-h-[1000px] overflow-hidden"
+        } gap-6`}
+      >
+        {(allMenuPage ? menuItems : menuItems.slice(0, 6)).map((item) => (
           <Link
             key={item.id}
             to={`/menu/${item.id}`}
@@ -54,7 +57,7 @@ const MenuCard = () => {
               <img
                 src={item.image_url || ""}
                 alt={item.title}
-                className="object-contain w-full h-full rounded-xl group-hover:scale-105 transition-all duration-300 "
+                className="object-contain w-full h-full rounded-xl group-hover:scale-105 transition-all duration-300"
               />
             </div>
             <h2 className="cal-sans-bold text-2xl mb-2">{item.title}</h2>
@@ -64,6 +67,7 @@ const MenuCard = () => {
           </Link>
         ))}
       </div>
+      )
     </div>
   );
 };

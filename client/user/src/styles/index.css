@@ -295,3 +295,27 @@ html {
   margin-top: 1rem;
   transform-origin: top right;
 }
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float-always {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.grid-2-rows {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  overflow: hidden;
+}

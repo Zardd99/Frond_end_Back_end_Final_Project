@@ -115,7 +115,7 @@ const Service = () => {
               </div>
 
               <div className="relative z-10 flex flex-col items-center text-center h-full">
-                <div className="relative mb-8 group-hover:animate-float">
+                <div className="relative mb-8 animate-float-always md:animate-none md:group-hover:animate-float">
                   <div
                     className={`absolute inset-0 ${content.iconBg} rounded-full blur-xl opacity-30 scale-150 group-hover:scale-175 transition-transform duration-700`}
                   ></div>
@@ -127,8 +127,8 @@ const Service = () => {
                     />
                   </div>
 
-                  <div className="absolute -top-2 -left-2 w-3 h-3 bg-gradient-to-r from-orange-400 to-red-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-opacity duration-300"></div>
-                  <div className="absolute -bottom-3 -right-3 w-2 h-2 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300 delay-150"></div>
+                  <div className="absolute -top-2 -left-2 w-3 h-3 bg-gradient-to-r from-orange-400 to-red-400 rounded-full opacity-100 md:opacity-0 md:group-hover:opacity-100 animate-ping md:animate-none md:group-hover:animate-ping transition-opacity duration-300"></div>
+                  <div className="absolute -bottom-3 -right-3 w-2 h-2 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full opacity-100 md:opacity-0 md:group-hover:opacity-100 animate-pulse md:animate-none group-hover:animate-pulse transition-opacity duration-300 delay-150"></div>
                 </div>
 
                 <div className="flex-1 flex flex-col justify-end">
@@ -193,21 +193,6 @@ const Service = () => {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
-        .group:hover .group-hover\\:animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 };

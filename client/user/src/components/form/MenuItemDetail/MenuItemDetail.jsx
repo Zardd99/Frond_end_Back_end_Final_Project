@@ -336,9 +336,8 @@ const MenuItemDetail = () => {
   }
 
   return (
-    <section className="mx-auto min-w-screen min-h-screen flex items-center pt-20 md:pt-30">
+    <section className="mx-auto min-w-screen min-h-screen pt-20 md:pt-30">
       <ErrorBoundary>
-        <div className="p-10"></div>
         <div className="container mx-auto p-4 lg:p-8 w-full">
           <div className="mb-6">
             <Link

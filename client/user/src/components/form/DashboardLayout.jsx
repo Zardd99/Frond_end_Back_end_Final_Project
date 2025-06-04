@@ -1,6 +1,5 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UserAuth } from "../../../../user/src/context/AuthContext";
-import AdminDashboard from "../../../../admin/src/components/form/AdminDashboard";
 
 const DashboardLayout = () => {
   const { user } = UserAuth();

@@ -60,7 +60,7 @@ const Menu = ({ allMenuPage }) => (
               className="group relative overflow-hidden bg-gradient-to-r from-foodle-brand-500 to-foodle-accent-500 hover:from-foodle-brand-600 hover:to-foodle-accent-600 text-light font-semibold px-4 py-2 md:px-8 md:py-4 rounded-full shadow-2xl hover:shadow-[0_10px_30px_rgba(249,115,22,0.25)] transition-all duration-300 transform hover:scale-105"
             >
               <div className="flex items-center gap-3">
-                <span className="text-sm text-lg">See All</span>
+                <span className="text-sm md:text-lg">See All</span>
               </div>
               <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
             </Link>
@@ -73,7 +73,7 @@ const Menu = ({ allMenuPage }) => (
     {/* Menu Card */}
     {/*  */}
     <div className="mt-10">
-      <MenuCard />
+      <MenuCard allMenuPage={allMenuPage} />
     </div>
 
     {/*  */}
