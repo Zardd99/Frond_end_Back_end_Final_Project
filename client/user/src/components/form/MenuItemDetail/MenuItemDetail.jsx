@@ -12,6 +12,7 @@ import QuantitySelector from "./components/QuantitySelector";
 import ReviewForm from "./components/ReviewForm";
 import ReviewList from "./components/ReviewList";
 import ErrorBoundary from "../../../ErrorBoundary";
+import CartContent from "./components/CartContent";
 
 const SIZE_OPTIONS = [
   { id: "small", name: "Small", multiplier: 0.8 },
@@ -455,6 +456,9 @@ const MenuItemDetail = () => {
                   </div>
                   <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
                 </button>
+                <div className="z-20">
+                  <CartContent />
+                </div>
               </div>
             </ProductDetails>
 
