@@ -24,7 +24,7 @@ const ProfileInformation = forwardRef(({ isEmailVisible, isAdmin }, ref) => {
   return (
     <div
       ref={ref}
-      className={`email-popup bg-gradient-to-br from-hero-orange-100 via-hero-red-100 to-hero-orange-200 text-hero-gray-900 w-100 h-auto absolute top-15 right-0 p-4 flex-col transition-all duration-300 ${
+      className={`email-popup  bg-gradient-to-br from-hero-orange-100 via-hero-red-100 to-hero-orange-200 text-hero-gray-900 w-65 md:w-100 h-auto absolute top-15 right-0 p-4 flex-col transition-all duration-300 ${
         isEmailVisible
           ? "opacity-100 translate-y-0 visible scale-100"
           : "opacity-0 -translate-y-4 invisible scale-95"
