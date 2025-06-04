@@ -47,6 +47,17 @@ const Menu = ({ allMenuPage }) => (
           {allMenuPage ? (
             <Link
               to="/"
+              onClick={() => {
+                setTimeout(() => {
+                  const menuSection = document.getElementById("menu");
+                  if (menuSection) {
+                    menuSection.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }
+                }, 100);
+              }}
               className="group relative overflow-hidden bg-gradient-to-r from-foodle-brand-500 to-foodle-accent-500 hover:from-foodle-brand-600 hover:to-foodle-accent-600 text-light font-semibold px-4 py-2 md:px-8 md:py-4 rounded-full shadow-2xl hover:shadow-[0_10px_30px_rgba(249,115,22,0.25)] transition-all duration-300 transform hover:scale-105"
             >
               <div className="flex items-center gap-3">
@@ -80,31 +91,32 @@ const Menu = ({ allMenuPage }) => (
     {/* Discount Section */}
     {/*  */}
     <div className="p-10"></div>
-    <div className="hidden md:flex h-[40rem] w-full p-4 justify-center items-center hover:shadow-lg rounded-3xl group hover:scale-101 transition-all duration-300">
-      <div className="flex w-1/2 h-full items-center justify-center p-5 overflow-hidden rounded-3xl  group-hover:scale-102 transition-all duration-400">
-        <img
-          src={Pizza}
-          alt=""
-          className="w-full h-full object-cover rounded-4xl"
-        />
-      </div>
-      <div className="flex w-1/2 h-full items-center justify-center p-5 ">
-        <div className="flex flex-col gap-4 justify-center items-center w-full h-full rounded-2xl group-hover:scale-102 transition-all duration-500">
-          <img
-            src={Burgur}
-            alt=""
-            className="object-cover w-full h-1/2 rounded-4xl"
-          />
-          <img
-            src={Burgur}
-            alt=""
-            className="object-cover w-full h-1/2 rounded-4xl"
-          />
-        </div>
-      </div>
-    </div>
+
     {!allMenuPage && (
       <>
+        <div className="hidden md:flex h-[40rem] w-full p-4 justify-center items-center hover:shadow-lg rounded-3xl group hover:scale-101 transition-all duration-300">
+          <div className="flex w-1/2 h-full items-center justify-center p-5 overflow-hidden rounded-3xl  group-hover:scale-102 transition-all duration-400">
+            <img
+              src={Pizza}
+              alt=""
+              className="w-full h-full object-cover rounded-4xl"
+            />
+          </div>
+          <div className="flex w-1/2 h-full items-center justify-center p-5 ">
+            <div className="flex flex-col gap-4 justify-center items-center w-full h-full rounded-2xl group-hover:scale-102 transition-all duration-500">
+              <img
+                src={Burgur}
+                alt=""
+                className="object-cover w-full h-1/2 rounded-4xl"
+              />
+              <img
+                src={Burgur}
+                alt=""
+                className="object-cover w-full h-1/2 rounded-4xl"
+              />
+            </div>
+          </div>
+        </div>
         <div className="p-10"></div>
         <div className="p-10"></div>
         <div className="p-10"></div>
