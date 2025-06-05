@@ -1,116 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ShoppingCart, Plus, Minus, X, Trash2 } from "lucide-react";
-import { UserAuth } from "../../../../context/AuthContext";
 import { supabase } from "../../../../../../../server/middleware/supabaseClient";
+import { useCart } from "../../../../context/CardContext";
 
 const CartContent = () => {
-  const [cartItems, setCartItems] = useState([]);
+  const { cartItems, loading, clearCart } = useCart();
   const [isOpen, setIsOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const { user } = UserAuth();
-
-  useEffect(() => {
-    let subscription;
-    const fetchCartItems = async () => {
-      if (!user) {
-        setCartItems([]);
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const { data, error } = await supabase
-          .from("cart_items")
-          .select(
-            `
-                id,
-                quantity,
-                size,
-                size_multiplier,
-                selected_add_ons,
-                total_price,
-                menu_items (
-                    id,
-                    title,
-                    image_url,
-                    price_tag
-                )
-            `
-          )
-          .eq("user_id", user.id);
-
-        if (error) throw error;
-
-        const transformedItems = data.map((item) => {
-          const basePrice = parseFloat(
-            item.menu_items.price_tag?.replace("$", "") || 0
-          );
-          const addOnTotal = (item.selected_add_ons || []).reduce(
-            (sum, addOn) => sum + (addOn.price || 0),
-            0
-          );
-          const totalPrice =
-            item.total_price ||
-            (basePrice * (item.size_multiplier || 1) + addOnTotal) *
-              item.quantity;
-
-          return {
-            id: item.id,
-            name: item.menu_items.name,
-            image_url: item.menu_items.image_url,
-            quantity: item.quantity,
-            size: item.size,
-            size_multiplier: item.size_multiplier || 1,
-            base_price: basePrice,
-            selected_add_ons: item.selected_add_ons || [],
-            total_price: totalPrice,
-          };
-        });
-
-        setCartItems(transformedItems);
-      } catch (error) {
-        console.error("Error fetching cart items:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    // fetchCartItems();
-
-    const setupRealtime = () => {
-      if (!user) return;
-
-      subscription = supabase
-        .channel("cart-updates")
-        .on(
-          "postgres_changes",
-          {
-            event: "*",
-            schema: "public",
-            table: "cart_items",
-            filter: `user_id=eq.${user.id}`,
-          },
-          () => {
-            fetchCartItems();
-          }
-        )
-        .subscribe();
-    };
-
-    if (user) {
-      fetchCartItems();
-      setupRealtime();
-    } else {
-      setCartItems([]);
-      setLoading(false);
-    }
-
-    return () => {
-      if (subscription) {
-        supabase.removeChannel(subscription);
-      }
-    };
-  }, [user]);
 
   const updateQuantity = async (itemId, newQuantity) => {
     if (newQuantity === 0) {
@@ -139,19 +34,6 @@ const CartContent = () => {
         .eq("id", itemId);
 
       if (error) throw error;
-
-      setCartItems((items) =>
-        items.map((item) => {
-          if (item.id === itemId) {
-            return {
-              ...item,
-              quantity: newQuantity,
-              total_price: newTotalPrice,
-            };
-          }
-          return item;
-        })
-      );
     } catch (error) {
       console.error("Error updating quantity:", error);
     }
@@ -165,38 +47,45 @@ const CartContent = () => {
         .eq("id", itemId);
 
       if (error) throw error;
-
-      setCartItems((items) => items.filter((item) => item.id !== itemId));
     } catch (error) {
       console.error("Error removing item:", error);
     }
   };
 
-  const clearCart = async () => {
-    if (!user) return;
+  const getTotalCartPrice = (cartItems) => {
+    if (!Array.isArray(cartItems)) return 0;
 
-    try {
-      const { error } = await supabase
-        .from("cart_items")
-        .delete()
-        .eq("user_id", user.id);
-
-      if (error) throw error;
-
-      setCartItems([]);
-    } catch (error) {
-      console.error("Error clearing cart:", error);
-    }
+    return cartItems.reduce((sum, item) => {
+      if (
+        item &&
+        typeof item === "object" &&
+        typeof item.total_price === "number"
+      ) {
+        return sum + item.total_price;
+      }
+      return sum;
+    }, 0);
   };
 
-  const getTotalCartPrice = () =>
-    cartItems.reduce((total, item) => total + item.total_price, 0);
+  const getTotalItemCount = (cartItems) => {
+    if (!Array.isArray(cartItems)) return 0;
 
-  const getTotalItemCount = () =>
-    cartItems.reduce((total, item) => total + item.quantity, 0);
+    return cartItems.reduce((sum, item) => {
+      if (
+        item &&
+        typeof item === "object" &&
+        typeof item.quantity === "number"
+      ) {
+        return sum + item.quantity;
+      }
+      return sum;
+    }, 0);
+  };
 
-  const formatSize = (size) =>
-    size.charAt(0).toUpperCase() + size.slice(1).replace("-", " ");
+  const formatSize = (size) => {
+    if (!size) return "";
+    return size.charAt(0).toUpperCase() + size.slice(1).replace("-", " ");
+  };
 
   if (loading) {
     return (
@@ -217,7 +106,7 @@ const CartContent = () => {
         <ShoppingCart className="w-6 h-6" />
         {cartItems.length > 0 && (
           <span className="absolute -top-2 -right-2 bg-hero-red-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
-            {getTotalItemCount()}
+            {getTotalItemCount(cartItems)}{" "}
           </span>
         )}
       </button>
@@ -242,7 +131,8 @@ const CartContent = () => {
                 </button>
               </div>
               <p className="text-white/90 mt-1">
-                {getTotalItemCount()} item{getTotalItemCount() !== 1 ? "s" : ""}
+                {getTotalItemCount(cartItems)} item
+                {getTotalItemCount(cartItems) !== 1 ? "s" : ""}{" "}
               </p>
             </div>
 
@@ -308,12 +198,13 @@ const CartContent = () => {
                                 Add-ons:
                               </p>
                               <div className="flex flex-wrap gap-1">
-                                {item.selected_add_ons.map((addOn) => (
+                                {item.selected_add_ons.map((addOn, index) => (
                                   <span
-                                    key={addOn.id}
+                                    key={addOn.id || index}
                                     className="inline-block bg-hero-orange-100 text-hero-orange-800 text-xs px-2 py-1 rounded-full"
                                   >
-                                    {addOn.name} (+${addOn.price?.toFixed(2)})
+                                    {addOn.name} (+$
+                                    {addOn.price?.toFixed(2) || "0.00"})
                                   </span>
                                 ))}
                               </div>
@@ -344,7 +235,7 @@ const CartContent = () => {
                             </div>
                             <div className="text-right">
                               <p className="font-bold text-hero-red-600">
-                                ${item.total_price.toFixed(2)}
+                                ${(item.total_price || 0).toFixed(2)}{" "}
                               </p>
                             </div>
                           </div>
@@ -368,7 +259,7 @@ const CartContent = () => {
                   <div className="text-right">
                     <p className="text-sm text-hero-gray-600">Total</p>
                     <p className="text-2xl font-bold text-hero-red-600">
-                      ${getTotalCartPrice().toFixed(2)}
+                      ${getTotalCartPrice(cartItems).toFixed(2)}{" "}
                     </p>
                   </div>
                 </div>

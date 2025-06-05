@@ -1,7 +1,93 @@
-import { useCallback } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { supabase } from "../../../../../../../server/middleware/supabaseClient";
 
 export default function useCartActions(session) {
+  const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchCartItems = useCallback(async () => {
+    if (!session?.user) return [];
+
+    setLoading(true);
+    try {
+      const { data, error: fetchError } = await supabase
+        .from("cart_items")
+        .select()
+        .eq("user_id", session.user.id);
+
+      if (fetchError) throw fetchError;
+      return data || [];
+    } catch (error) {
+      setError(error.message);
+      return [];
+    } finally {
+      setLoading(false);
+    }
+  }, [session]);
+
+  useEffect(() => {
+    if (!session?.user) return;
+
+    let subscription;
+    let isMounted = true;
+
+    const setupSubscription = async () => {
+      try {
+        // Initial fetch
+        const items = await fetchCartItems();
+        if (isMounted) setCartItems(items);
+
+        // Realtime subscription
+        subscription = supabase
+          .channel(`cart:${session.user.id}`)
+          .on(
+            "postgres_changes",
+            {
+              event: "*",
+              schema: "public",
+              table: "cart_items",
+              filter: `user_id=eq.${session.user.id}`,
+            },
+            async (payload) => {
+              if (payload.eventType === "DELETE" && !payload.old.id) {
+                const updatedItems = await fetchCartItems();
+                if (isMounted) setCartItems(updatedItems);
+              } else {
+                switch (payload.eventType) {
+                  case "INSERT":
+                    setCartItems((prev) => [...prev, payload.new]);
+                    break;
+                  case "UPDATE":
+                    setCartItems((prev) =>
+                      prev.map((item) =>
+                        item.id === payload.new.id ? payload.new : item
+                      )
+                    );
+                    break;
+                  case "DELETE":
+                    setCartItems((prev) =>
+                      prev.filter((item) => item.id !== payload.old.id)
+                    );
+                    break;
+                }
+              }
+            }
+          )
+          .subscribe();
+      } catch (error) {
+        console.error("Subscription setup failed:", error);
+      }
+    };
+
+    setupSubscription();
+
+    return () => {
+      isMounted = false;
+      if (subscription) supabase.removeChannel(subscription);
+    };
+  }, [session, fetchCartItems]);
+
   const addToCart = useCallback(
     async (
       itemId,
@@ -66,5 +152,26 @@ export default function useCartActions(session) {
     [session]
   );
 
-  return { addToCart };
+  const clearCart = useCallback(async () => {
+    if (!session?.user?.id) {
+      throw new Error("User not authenticated");
+    }
+
+    try {
+      setCartItems([]);
+
+      const { error } = await supabase
+        .from("cart_items")
+        .delete()
+        .eq("user_id", session.user.id);
+
+      if (error) throw error;
+    } catch (error) {
+      const items = await fetchCartItems();
+      setCartItems(items);
+      throw error;
+    }
+  }, [session, fetchCartItems]);
+
+  return { addToCart, cartItems, clearCart, loading, error };
 }

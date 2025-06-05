@@ -33,7 +33,6 @@ function App() {
             <Route path="/signup" element={<Sign_Up />} />
             <Route path="/allmenu" element={<AllMenu />} />
             <Route path="/menu/:itemId" element={<MenuItemDetail />} />
-
             <Route element={<PrivateRoute allowedRoles={["user", "Admin"]} />}>
               <Route path="/dashboard" element={<DashboardLayout />} />
               <Route element={<PrivateRoute allowedRoles={["Admin"]} />}>

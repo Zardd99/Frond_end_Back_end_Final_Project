@@ -1,10 +1,13 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
-import { UserAuth } from "../../../context/AuthContext";
+
+// hooks
 import useMenuItemData from "./hooks/useMenuItemData";
 import useCartActions from "./hooks/useCartActions";
 import useReviews from "./hooks/useReviews";
 import useOrder from "./hooks/useOrder";
+
+// components
 import ProductDetails from "./components/ProductDetails";
 import SizeOptions from "./components/SizeOptions";
 import AddOnOptions from "./components/AddOnOptions";
@@ -13,6 +16,12 @@ import ReviewForm from "./components/ReviewForm";
 import ReviewList from "./components/ReviewList";
 import ErrorBoundary from "../../../ErrorBoundary";
 import CartContent from "./components/CartContent";
+import CartSummary from "./components/CartSummary";
+import OrderStatusIndicator from "./components/OrderStatusIndicator";
+
+// context
+import { UserAuth } from "../../../context/AuthContext";
+import { CartProvider } from "../../../context/CardContext";
 
 const SIZE_OPTIONS = [
   { id: "small", name: "Small", multiplier: 0.8 },
@@ -69,8 +78,12 @@ const MenuItemDetail = () => {
     refetch,
     error: menuError,
   } = useMenuItemData(itemId, session);
-  const { addToCart } = useCartActions(session);
-  const { createOrder, isProcessing: isOrderProcessing } = useOrder(session);
+  const { addToCart, clearCart, loading } = useCartActions(session);
+  const {
+    buyNowDirect,
+    isProcessing: isOrderProcessing,
+    orderStatus,
+  } = useOrder(session);
   const { comments, fetchComments, submitReview, deleteReview, updateReview } =
     useReviews(itemId, session, isAdmin);
 
@@ -201,14 +214,35 @@ const MenuItemDetail = () => {
     }
 
     try {
-      const addResult = await handleAddToCart({ suppressAlert: true });
-      if (!addResult.success) {
-        throw new Error(addResult.message);
-      }
+      //
+      // This block of code will made the "Buy now" button do two job at the same time
+      // if the cart not exist it will automatic add the default items to cart and buy the item in the cart
 
-      const orderResult = await createOrder();
+      // const addResult = await handleAddToCart({ suppressAlert: true });
+      // if (!addResult.success) {
+      //   throw new Error(addResult.message);
+      // }
+
+      //
+      //
+
+      const orderResult = await buyNowDirect(
+        itemId,
+        menuItem,
+        selectedSize,
+        selectedAddOns,
+        quantity,
+        totalPrice
+      );
 
       if (orderResult.success) {
+        try {
+          await clearCart();
+          console.log("Cart cleared successfully after order");
+        } catch (clearError) {
+          console.error("Failed to clear cart after order:", clearError);
+        }
+
         showNotification(
           `Order #${
             orderResult.orderId
@@ -222,12 +256,19 @@ const MenuItemDetail = () => {
     }
   }, [
     requireAuth,
-    handleAddToCart,
-    createOrder,
+    buyNowDirect,
+    itemId,
+    menuItem,
+    selectedSize,
+    selectedAddOns,
+    quantity,
+    totalPrice,
     showNotification,
     handleError,
     isOrderProcessing,
     isAddingToCart,
+    // handleAddToCart,
+    clearCart,
   ]);
 
   const handleAddOnToggle = useCallback(
@@ -310,10 +351,12 @@ const MenuItemDetail = () => {
     [updateReview, fetchComments, refetch, showNotification, handleError]
   );
 
+  if (loading) return <div> Loading </div>;
+
   if (menuError) {
     return (
       <div className="container mx-auto p-4 lg:p-8">
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+        <div className="bg-hero-red-100 border border-hero-red-400 text-hero-red-700 px-4 py-3 rounded">
           Error loading menu item: {menuError.message}
         </div>
       </div>
@@ -324,7 +367,7 @@ const MenuItemDetail = () => {
     return (
       <div className="container mx-auto p-4 lg:p-8">
         <div className="text-center py-8">
-          <p className="text-gray-500">Menu item not found</p>
+          <p className="text-hero-gray-500">Menu item not found</p>
           <Link
             to="/"
             className="cal-sans-bold text-hero-red-600 hover:underline mt-4 inline-block"
@@ -456,12 +499,16 @@ const MenuItemDetail = () => {
                   </div>
                   <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
                 </button>
-                <div className="z-20">
-                  <CartContent />
-                </div>
               </div>
             </ProductDetails>
-
+            <CartProvider>
+              <div className="z-20">
+                <CartContent />
+              </div>
+              <div className="lg:col-span-1">
+                <CartSummary />
+              </div>
+            </CartProvider>
             {/*  */}
             {/* Order Notify */}
             {/*  */}
@@ -479,6 +526,8 @@ const MenuItemDetail = () => {
               </div>
             )}
           </div>
+
+          {orderStatus && <OrderStatusIndicator orderStatus={orderStatus} />}
 
           {/* Reviews */}
           <div className="bg-gradient-to-r from-hero-orange-50 to-hero-red-100 rounded-3xl p-6 lg:p-8">
