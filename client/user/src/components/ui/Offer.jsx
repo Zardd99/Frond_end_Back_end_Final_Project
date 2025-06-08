@@ -1,48 +1,4 @@
-import Icon_Img from "../../assets/Hero_img.png";
-import FastFood from "../../assets/Burgur.png";
-
-import Emoji_1 from "../../assets/paimon-s-paintings-set-35-2.png";
-import Emoji_2 from "../../assets/paimon-s-paintings-set-35-4.png";
-import Emoji_3 from "../../assets/paimon-s-paintings-set-35-6.png";
-
-const OFFER_CONTENTS = [
-  {
-    title: "Fast Delivery",
-    description:
-      "The Food Will Be Delivered to Your Home Within 1 - 2 Hours Of Your Ordering.",
-    img: Icon_Img,
-    gradient: "from-offer-primary-400 to-offer-accent-500",
-    shadowColor: "shadow-offer-primary-400/20",
-    iconBg: "bg-gradient-to-br from-offer-primary-100 to-offer-primary-200",
-    hoverGradient:
-      "group-hover:from-offer-primary-400 group-hover:to-offer-accent-500",
-    emoji: Emoji_1,
-  },
-  {
-    title: "Fresh Food",
-    description:
-      "Your Food Will Be Delivered 100% Fresh To Your Home. We Do Not Deliver Stale Food.",
-    img: FastFood,
-    gradient: "from-offer-fresh-400 to-offer-emerald-500",
-    shadowColor: "shadow-offer-fresh-400/20",
-    iconBg: "bg-gradient-to-br from-offer-fresh-100 to-offer-fresh-200",
-    hoverGradient:
-      "group-hover:from-offer-fresh-400 group-hover:to-offer-emerald-500",
-    emoji: Emoji_2,
-  },
-  {
-    title: "Free Delivery",
-    description:
-      "Your Food Delivery Is Absolutely Free. No Cost Just Order And Enjoy.",
-    img: Icon_Img,
-    gradient: "from-offer-cool-400 to-offer-purple-500",
-    shadowColor: "shadow-offer-cool-400/20",
-    iconBg: "bg-gradient-to-br from-offer-cool-100 to-offer-cool-200",
-    hoverGradient:
-      "group-hover:from-offer-cool-400 group-hover:to-offer-purple-500",
-    emoji: Emoji_3,
-  },
-];
+import { OFFER_CONTENTS } from "./constants";
 
 const Offer = () => {
   return (

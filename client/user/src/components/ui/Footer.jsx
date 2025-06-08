@@ -11,7 +11,7 @@ const Footer = () => {
       const documentHeight = document.documentElement.scrollHeight;
       const scrollPercentage = scrollPosition / (documentHeight - windowHeight);
 
-      setIsExpanded(scrollPercentage > 0.8);
+      setIsExpanded(scrollPercentage > 0.5);
     };
 
     window.addEventListener("scroll", handleScroll);

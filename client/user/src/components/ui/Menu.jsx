@@ -1,15 +1,9 @@
 import { Link } from "react-router-dom";
 import MenuCard from "./MenuCard";
+import { MENU_CONTENT } from "./constants";
 
 import Burgur from "../../assets/horizon_banner.jpg";
 import Pizza from "../../assets/verticle_banner.jpg";
-
-const MENU_CONTENT = [
-  {
-    description:
-      "Thees Are Our Regular Menus. You Can Order Anything You Like. ",
-  },
-];
 
 const Menu = ({ allMenuPage }) => (
   <section

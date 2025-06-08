@@ -1,14 +1,5 @@
 import { Link } from "react-router-dom";
-
-const HERO_CONTENT = [
-  {
-    title: "All Fast Food is Available at ",
-    description: "We Are Just a Click Away When You Crave Delicious Fast Food",
-    button: "Buy Now",
-    orderButton: "How to Order",
-    img: "https://i.pinimg.com/736x/64/40/c3/6440c345ba03086afa7ef024673574df.jpg",
-  },
-];
+import { HERO_CONTENT } from "./constants";
 
 const Hero = () => (
   <section
@@ -153,7 +144,7 @@ const Hero = () => (
                 />
 
                 <div
-                  className="absolute -top-4 -right-4 bg-gradient-to-r from-hero-yellow-400 to-hero-orange-500 text-hero-white p-3 rounded-full shadow-lg animate-bounce"
+                  className="absolute -top-4 -right-4 bg-gradient-to-r from-hero-yellow-400 to-hero-orange-500 text-hero-white p-3 rounded-full shadow-lg animate-bounce "
                   style={{ animationDuration: "2s" }}
                 >
                   <svg

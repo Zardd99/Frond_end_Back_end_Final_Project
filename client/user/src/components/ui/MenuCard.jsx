@@ -62,7 +62,9 @@ const MenuCard = ({ allMenuPage }) => {
 
       <div
         className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 ${
-          allMenuPage ? "" : "max-h-[1200px] overflow-scroll"
+          allMenuPage
+            ? ""
+            : "max-h-[1200px] overflow-y-scroll overflow-x-hidden"
         }`}
       >
         {(allMenuPage ? menuItems : menuItems.slice(0, 8)).map((item) => (

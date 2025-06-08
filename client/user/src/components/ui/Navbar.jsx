@@ -2,14 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import { useEffect, useState, useRef } from "react";
 import { supabase } from "../../../../../server/middleware/supabaseClient";
-
-const links = [
-  { name: "Home", href: "#home" },
-  { name: "Offer", href: "#offer" },
-  { name: "Service", href: "#service" },
-  { name: "Menu", href: "#menu" },
-  { name: "About US", href: "#about" },
-];
+import { links } from "./constants/index";
 
 import ProfileImg from "../../assets/profile_picture.jpg";
 import Navbar_tablet from "../form/Navbar_tablet";

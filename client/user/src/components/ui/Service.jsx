@@ -1,46 +1,6 @@
 import React from "react";
-import ChickenBurger_Img from "../../assets/FastFood.png";
-import ChickenPizza_Img from "../../assets/Burgur.png";
-import FrenchFries_Img from "../../assets/FrenchFries.png";
+import { SERVICE_CONTENT } from "./constants";
 import { Link } from "react-router-dom";
-
-const SERVICE_CONTENT = [
-  {
-    description:
-      "Here Are Some Of Our Best Distributed Categories. If You Want To You Can Order From Here.",
-    img: ChickenBurger_Img,
-    categories_title: "Chicken Burger",
-    categories_description: "Go See Menu",
-    bgGradient: "from-foodle-warning-50 to-foodle-brand-100",
-    accentColor: "text-foodle-brand-500",
-    hoverGradient:
-      "group-hover:from-foodle-brand-500 group-hover:to-foodle-accent-500",
-    shadowColor: "shadow-foodle-brand",
-    iconBg: "bg-foodle-brand-100",
-  },
-  {
-    description: null,
-    img: ChickenPizza_Img,
-    categories_title: "Chicken Pizza",
-    categories_description: "Go See Menu",
-    bgGradient: "from-foodle-accent-50 to-pink-100",
-    accentColor: "text-foodle-accent-500",
-    hoverGradient: "group-hover:from-red-500 group-hover:to-pink-500",
-    shadowColor: "shadow-foodle-accent",
-    iconBg: "bg-foodle-accent-100",
-  },
-  {
-    description: null,
-    categories_title: "French Fries",
-    img: FrenchFries_Img,
-    categories_description: "Go See Menu",
-    bgGradient: "from-foodle-warning-50 to-foodle-warning-100",
-    accentColor: "text-foodle-warning-600",
-    hoverGradient: "group-hover:from-yellow-500 group-hover:to-amber-500",
-    shadowColor: "shadow-foodle-warning",
-    iconBg: "bg-foodle-warning-100",
-  },
-];
 
 const Service = () => {
   return (
