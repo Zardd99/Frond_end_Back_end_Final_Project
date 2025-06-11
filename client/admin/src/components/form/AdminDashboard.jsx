@@ -534,7 +534,7 @@ const AdminDashboard = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    setShowInsertForm(false);
+                    setShowEditForm(false);
                     setEditItem({
                       id: null,
                       title: "",
