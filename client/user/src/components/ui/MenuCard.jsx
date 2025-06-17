@@ -118,7 +118,7 @@ const MenuCard = ({ allMenuPage }) => {
       {!allMenuPage && menuItems.length > 8 && (
         <div className="text-center mt-12">
           <Link
-            to="/menu"
+            to="/allmenu"
             className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-full hover:from-orange-600 hover:to-red-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             View All Menu Items
