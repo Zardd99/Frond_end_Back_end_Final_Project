@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext";
+import { loginUser } from "../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -8,7 +8,6 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
 
-  const { loginUser } = UserAuth();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {

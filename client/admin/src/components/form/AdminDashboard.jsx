@@ -241,27 +241,29 @@ const AdminDashboard = () => {
   if (user?.role !== "Admin") return null;
 
   return (
-    <div className="flex flex-col w-full h-full items-center cal-sans-regular">
+    <div className="min-h-screen bg-hero-white text-black cal-sans-regular">
       <div className="p-20"></div>
-      <div className="bg-light rounded-lg shadow p-6 container">
-        <h2 className="text-2xl font-bold mb-4">Admin Dashboard</h2>
+      <div className="bg-hero-white border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] p-8 container mx-auto">
+        <h2 className="text-4xl font-bold mb-6 uppercase tracking-wider">
+          Admin Dashboard
+        </h2>
 
-        <div className="flex border-b mb-6">
+        <div className="flex border-b-4 border-black mb-8">
           <button
-            className={`py-2 px-4 font-medium ${
+            className={`py-4 px-6 font-bold uppercase tracking-wide transition-all ${
               activeTab === "users"
-                ? "border-b-2 border-hero-red-400 text-hero-red-500"
-                : "text-hero-gray-800"
+                ? "bg-black text-hero-white border-2 border-black -mb-1"
+                : "bg-hero-white text-black border-2 border-transparent hover:border-black"
             }`}
             onClick={() => setActiveTab("users")}
           >
             User Management
           </button>
           <button
-            className={`py-2 px-4 font-medium ${
+            className={`py-4 px-6 font-bold uppercase tracking-wide transition-all ml-2 ${
               activeTab === "menu"
-                ? "border-b-2 border-hero-red-400 text-hero-red-500"
-                : "text-hero-gray-800"
+                ? "bg-black text-hero-white border-2 border-black -mb-1"
+                : "bg-hero-white text-black border-2 border-transparent hover:border-black"
             }`}
             onClick={() => setActiveTab("menu")}
           >
@@ -270,55 +272,63 @@ const AdminDashboard = () => {
         </div>
 
         {error && (
-          <div className="text-hero-red-600 bg-hero-white/80 backdrop-blur-xl border border-hero-gray-100/20 rounded-3xl p-5 mb-4 absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] shadow-2xl shadow-black/5 z-50">
+          <div className="text-black bg-hero-white border-4 border-black p-6 mb-4 absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-50 font-bold">
             {error}
           </div>
         )}
 
         {showNotification && (
-          <div className="text-green-600 bg-green-100 border border-green-200 rounded-3xl p-5 mb-4 absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] shadow-2xl shadow-black/5 z-50">
+          <div className="text-black bg-hero-white border-4 border-black p-6 mb-4 absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-50 font-bold">
             {showNotification}
           </div>
         )}
 
         {activeTab === "users" &&
           (loading.users ? (
-            <div className="text-center p-4">Loading users...</div>
+            <div className="text-center p-4 font-bold text-xl">
+              Loading users...
+            </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full border-4 border-black">
                 <thead>
-                  <tr className="border-b">
-                    <th className="text-left p-3">Email</th>
-                    <th className="text-left p-3">Role</th>
-                    <th className="text-left p-3">Status</th>
+                  <tr className="bg-black text-hero-white">
+                    <th className="text-left p-4 font-bold uppercase tracking-wide">
+                      Email
+                    </th>
+                    <th className="text-left p-4 font-bold uppercase tracking-wide">
+                      Role
+                    </th>
+                    <th className="text-left p-4 font-bold uppercase tracking-wide">
+                      Status
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {users.map((userData) => (
                     <tr
                       key={userData.user_id}
-                      className="border-b hover:bg-hero-gray-100"
+                      className="border-b-2 border-black hover:bg-hero-gray-100"
                     >
-                      <td className="p-3">{userData.email}</td>
-                      <td className="p-3">
+                      <td className="p-4 font-medium">{userData.email}</td>
+                      <td className="p-4">
                         <select
                           value={userData.role}
                           onChange={(e) => {
                             updateRole(userData.user_id, e.target.value);
                           }}
-                          className="border rounded px-2 py-1"
+                          className="border-2 border-black bg-hero-white px-3 py-2 font-bold"
                         >
                           <option value="User">user</option>
                           <option value="Admin">Admin</option>
                         </select>
                       </td>
-                      <td className="p-3">
+                      <td className="p-4">
                         <span
-                          className={`px-2 py-1 rounded-full text-xs ${
+                          className={`px-4 py-2 font-bold uppercase tracking-wide ${
                             userData.banned
-                              ? "bg-hero-red-300 text-hero-red-600"
-                              : "bg-offer-fresh-300 text-offer-fresh-700"
+                              ? "bg-black text-hero-white"
+                              : "bg-hero-white text-black border-2 border-black"
                           }`}
                         >
                           {userData.banned ? "Banned" : "Active"}
@@ -333,28 +343,30 @@ const AdminDashboard = () => {
 
         {activeTab === "menu" && (
           <div>
-            <div className="flex justify-end mb-4">
+            <div className="flex justify-end mb-6">
               <button
                 onClick={() => setShowInsertForm(true)}
-                className="bg-hero-red-500 text-light px-4 py-2 rounded-lg hover:bg-bold-red-hover"
+                className="bg-black text-hero-white px-6 py-3 font-bold uppercase tracking-wide hover:bg-hero-gray-800 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]"
               >
                 Add Menu Item
               </button>
             </div>
 
             {loading.menu ? (
-              <div className="text-center p-4">Loading menu items...</div>
+              <div className="text-center p-4 font-bold text-xl">
+                Loading menu items...
+              </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {menuItems.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-background p-6 rounded-3xl shadow-lg shadow-regular hover:shadow-xl transition-shadow relative"
+                    className="bg-hero-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative"
                   >
-                    <div className="absolute top-4 right-4 flex gap-2">
+                    <div className="absolute top-4 right-4 flex gap-2 z-10">
                       <button
                         onClick={() => handleEditClick(item)}
-                        className="text-blue-500 hover:text-blue-400"
+                        className="bg-hero-white border-2 border-black p-2 hover:bg-hero-gray-100"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -368,7 +380,7 @@ const AdminDashboard = () => {
                       </button>
                       <button
                         onClick={() => setItemToDelete(item.id)}
-                        className="text-hero-red-500 hover:text-hero-red-400"
+                        className="bg-black text-hero-white border-2 border-black p-2 hover:bg-hero-gray-800"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -385,23 +397,23 @@ const AdminDashboard = () => {
                       </button>
                     </div>
 
-                    <div className="h-48 mb-4 rounded-xl flex items-center justify-center">
+                    <div className="h-48 mb-4 bg-hero-gray-100 border-b-2 border-black flex items-center justify-center">
                       <img
                         src={item.image_url || ""}
                         alt={item.title}
-                        className="object-cover w-full h-full rounded-xl"
+                        className="object-cover w-full h-full"
                         onError={(e) => {
                           e.target.src = "/placeholder-image.jpg";
                         }}
                       />
                     </div>
-                    <h2 className="cal-sans-bold text-2xl mb-2">
-                      {item.title}
-                    </h2>
-                    <p className="cal-sans-bold text-hero-red-500 text-xl mb-4">
-                      {item.price_tag}
-                    </p>
-                    <p className="text-dark mb-4">{item.description}</p>
+                    <div className="p-6">
+                      <h2 className="font-bold text-2xl mb-2 uppercase tracking-wide">
+                        {item.title}
+                      </h2>
+                      <p className="font-bold text-xl mb-4">{item.price_tag}</p>
+                      <p className="text-black mb-4">{item.description}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -411,14 +423,18 @@ const AdminDashboard = () => {
       </div>
 
       {showInsertForm && (
-        <div className="fixed inset-0 bg-dark bg-opacity-50 flex items-center justify-center p-4 z-70">
-          <div className="bg-gradient-to-br from-hero-cyan-200 via-hero-cyan-300 to-hero-cyan-400 p-8 rounded-2xl max-w-md w-full">
-            <h2 className="text-2xl mb-4">Add New Menu Item</h2>
-            <form onSubmit={handleAddItem}>
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+          <div className="bg-hero-white border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] max-w-md w-full">
+            <div className="bg-black text-hero-white p-4">
+              <h2 className="text-2xl mb-4 font-bold uppercase tracking-wide">
+                Add New Menu Item
+              </h2>
+            </div>
+            <form onSubmit={handleAddItem} className="p-6">
               <input
                 type="text"
                 placeholder="Item Name"
-                className="w-full p-3 mb-3 rounded-xl border"
+                className="w-full p-3 mb-3 border-2 border-black font-bold placeholder-hero-gray-500"
                 value={newItem.title}
                 onChange={(e) =>
                   setNewItem({ ...newItem, title: e.target.value })
@@ -428,7 +444,7 @@ const AdminDashboard = () => {
               <input
                 type="text"
                 placeholder="Price (e.g., $5.99)"
-                className="w-full p-3 mb-3 rounded-xl border"
+                className="w-full p-3 mb-3 border-2 border-black font-bold placeholder-hero-gray-500"
                 value={newItem.price_tag}
                 onChange={(e) =>
                   setNewItem({ ...newItem, price_tag: e.target.value })
@@ -437,7 +453,7 @@ const AdminDashboard = () => {
               />
               <textarea
                 placeholder="Description"
-                className="w-full p-3 mb-3 rounded-xl border"
+                className="w-full p-3 mb-3 border-2 border-black font-bold placeholder-hero-gray-500 resize-none"
                 value={newItem.description}
                 onChange={(e) =>
                   setNewItem({ ...newItem, description: e.target.value })
@@ -448,7 +464,7 @@ const AdminDashboard = () => {
               <input
                 type="url"
                 placeholder="Image URL"
-                className="w-full p-3 mb-4 rounded-xl border"
+                className="w-full p-3 mb-4 border-2 border-black font-bold placeholder-hero-gray-500"
                 value={newItem.image_url}
                 onChange={(e) =>
                   setNewItem({ ...newItem, image_url: e.target.value })
@@ -458,14 +474,14 @@ const AdminDashboard = () => {
               <div className="flex gap-4">
                 <button
                   type="submit"
-                  className="bg-hero-red-500 text-light px-6 py-2 rounded-lg hover:bg-bold-red-hover"
+                  className="bg-black text-hero-white px-6 py-2 font-bold uppercase tracking-wide hover:bg-hero-gray-800"
                 >
                   Add Item
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowInsertForm(false)}
-                  className="bg-hero-gray-500 text-light px-6 py-2 rounded-lg hover:bg-regular-hover"
+                  className="bg-hero-white text-black border-2 border-black px-6 py-2 font-bold uppercase tracking-wide hover:bg-hero-gray-100"
                 >
                   Cancel
                 </button>
@@ -480,14 +496,18 @@ const AdminDashboard = () => {
       {/* UpdateForm */}
 
       {showEditForm && (
-        <div className="fixed inset-0 bg-dark bg-opacity-50 flex items-center justify-center p-4 z-70">
-          <div className="bg-gradient-to-br from-hero-cyan-200 via-hero-cyan-300 to-hero-cyan-400 p-8 rounded-2xl max-w-md w-full">
-            <h2 className="text-2xl mb-4">Add New Menu Item</h2>
-            <form onSubmit={handleUpdateItem}>
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+          <div className="bg-hero-white border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] max-w-md w-full">
+            <div className="bg-black text-hero-white p-4">
+              <h2 className="text-2xl mb-4 font-bold uppercase tracking-wide">
+                Edit Menu Item
+              </h2>
+            </div>
+            <form onSubmit={handleUpdateItem} className="p-6">
               <input
                 type="text"
                 placeholder="Item Name"
-                className="w-full p-3 mb-3 rounded-xl border"
+                className="w-full p-3 mb-3 border-2 border-black font-bold placeholder-hero-gray-500"
                 value={editItem.title}
                 onChange={(e) =>
                   setEditItem({ ...editItem, title: e.target.value })
@@ -497,7 +517,7 @@ const AdminDashboard = () => {
               <input
                 type="text"
                 placeholder="Price (e.g., $5.99)"
-                className="w-full p-3 mb-3 rounded-xl border"
+                className="w-full p-3 mb-3 border-2 border-black font-bold placeholder-hero-gray-500"
                 value={editItem.price_tag}
                 onChange={(e) =>
                   setEditItem({ ...editItem, price_tag: e.target.value })
@@ -506,7 +526,7 @@ const AdminDashboard = () => {
               />
               <textarea
                 placeholder="Description"
-                className="w-full p-3 mb-3 rounded-xl border"
+                className="w-full p-3 mb-3 border-2 border-black font-bold placeholder-hero-gray-500 resize-none"
                 value={editItem.description}
                 onChange={(e) =>
                   setEditItem({ ...editItem, description: e.target.value })
@@ -517,7 +537,7 @@ const AdminDashboard = () => {
               <input
                 type="url"
                 placeholder="Image URL"
-                className="w-full p-3 mb-4 rounded-xl border"
+                className="w-full p-3 mb-4 border-2 border-black font-bold placeholder-hero-gray-500"
                 value={editItem.image_url}
                 onChange={(e) =>
                   setEditItem({ ...editItem, image_url: e.target.value })
@@ -527,9 +547,9 @@ const AdminDashboard = () => {
               <div className="flex gap-4">
                 <button
                   type="submit"
-                  className="bg-hero-red-500 text-light px-6 py-2 rounded-lg hover:bg-bold-red-hover"
+                  className="bg-black text-hero-white px-6 py-2 font-bold uppercase tracking-wide hover:bg-hero-gray-800"
                 >
-                  Add Item
+                  Update Item
                 </button>
                 <button
                   type="button"
@@ -543,7 +563,7 @@ const AdminDashboard = () => {
                       image_url: "",
                     });
                   }}
-                  className="bg-hero-gray-500 text-light px-6 py-2 rounded-lg hover:bg-regular-hover"
+                  className="bg-hero-white text-black border-2 border-black px-6 py-2 font-bold uppercase tracking-wide hover:bg-hero-gray-100"
                 >
                   Cancel
                 </button>
@@ -554,30 +574,37 @@ const AdminDashboard = () => {
       )}
 
       {itemToDelete && (
-        <div className="fixed inset-0 bg-dark bg-opacity-50 flex items-center justify-center p-4 z-70">
-          <div className="bg-hero-gray-200 p-8 rounded-2xl max-w-md w-full">
-            <h2 className="text-2xl mb-4">Delete Menu Item?</h2>
-            <p className="mb-6">
-              Are you sure you want to delete this item? This action cannot be
-              undone.
-            </p>
-            <div className="flex gap-4">
-              <button
-                className="bg-hero-red-600 text-hero-gray-200 px-6 py-2 rounded-lg hover:bg-bold-red-hover"
-                onClick={handleDeleteItem}
-              >
-                Delete
-              </button>
-              <button
-                className="bg-hero-gray-300 text-hero-gray-900 px-6 py-2 rounded-lg hover:bg-regular-hover"
-                onClick={() => setItemToDelete(null)}
-              >
-                Cancel
-              </button>
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+          <div className="bg-hero-white border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] max-w-md w-full">
+            <div className="bg-black text-hero-white p-4">
+              <h2 className="text-2xl mb-4 font-bold uppercase tracking-wide">
+                Delete Menu Item?
+              </h2>
+            </div>
+            <div className="p-6">
+              <p className="mb-6">
+                Are you sure you want to delete this item? This action cannot be
+                undone.
+              </p>
+              <div className="flex gap-4">
+                <button
+                  className="bg-black text-hero-white px-6 py-2 font-bold uppercase tracking-wide hover:bg-hero-gray-800"
+                  onClick={handleDeleteItem}
+                >
+                  Delete
+                </button>
+                <button
+                  className="bg-hero-white text-black border-2 border-black px-6 py-2 font-bold uppercase tracking-wide hover:bg-hero-gray-100"
+                  onClick={() => setItemToDelete(null)}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         </div>
       )}
+      <div className="p-4"></div>
     </div>
   );
 };

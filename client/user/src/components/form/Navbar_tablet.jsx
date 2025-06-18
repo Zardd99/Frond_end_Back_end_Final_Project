@@ -21,7 +21,7 @@ const Navbar_tablet = forwardRef(({ isNavbarVisible, links }, ref) => {
 
   return (
     <div
-      className={`Navbar_link navbar-popup cal-sans-regular text-left text-sm bg-gradient-to-br from-hero-orange-100 via-hero-red-100 to-hero-orange-200 text-hero-gray-900  p-4 flex md:hidden flex-col rounded-xl transition-all duration-300 h-full w-6/7 justify-around
+      className={`Navbar_link navbar-popup cal-sans-regular text-left text-sm bg-gradient-to-br from-hero-gray-50 via-hero-white to-hero-gray-100 text-hero-gray-900 border border-hero-gray-200 shadow-xl p-4 flex md:hidden flex-col rounded-xl transition-all duration-300 h-full w-6/7 justify-around
                   ${
                     isNavbarVisible
                       ? "opacity-100 translate-y-0 visible scale-100"
@@ -33,13 +33,13 @@ const Navbar_tablet = forwardRef(({ isNavbarVisible, links }, ref) => {
     >
       <Link
         to="/"
-        className="flex cal-sans-bold text-2xl bg-gradient-to-r from-offer-purple-600 via-offer-cool-600 to-offer-emerald-600 bg-clip-text text-transparent hover:from-offer-purple-700 hover:via-offer-cool-700 hover:to-offer-emerald-700 transition-all duration-300 transform hover:scale-105"
+        className="flex cal-sans-bold text-2xl bg-gradient-to-r from-black via-hero-hero-gray-700 to-black bg-clip-text text-transparent hover:from-hero-gray-800 hover:via-hero-gray-600 hover:to-hero-gray-800 transition-all duration-300 transform hover:scale-105"
       >
         Welcome
       </Link>
       {links.map((link) => (
         <a
-          className="group flex items-center justify-between pr-5 "
+          className="group flex items-center justify-between pr-5 hover:bg-hero-gray-50 rounded-lg p-3 transition-colors duration-200"
           key={link.name}
           href={link.href}
           onClick={handleScroll(link.href.substring(1))}
@@ -48,7 +48,7 @@ const Navbar_tablet = forwardRef(({ isNavbarVisible, links }, ref) => {
             key={link.name}
             href={link.href}
             onClick={handleScroll(link.href.substring(1))}
-            className="mx-6 rounded-md group-hover:text-hero-red-500 relative inline-block transition-all duration-200 group-hover:after:content-[''] group-hover:after:absolute group-hover:after:left-0 group-hover:after:bottom-0 group-hover:after:h-[2px] group-hover:after:w-1/2 group-hover:after:bg-hero-red-600 group-hover:after:transition-all text-left"
+            className="mx-6 rounded-md group-hover:text-black relative inline-block transition-all duration-200 group-hover:after:content-[''] group-hover:after:absolute group-hover:after:left-0 group-hover:after:bottom-0 group-hover:after:h-[2px] group-hover:after:w-1/2 group-hover:after:bg-black group-hover:after:transition-all text-left font-medium"
           >
             {link.name}
           </span>
@@ -56,7 +56,7 @@ const Navbar_tablet = forwardRef(({ isNavbarVisible, links }, ref) => {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="size-6 group-hover:translate-x-1 group-hover:text-hero-red-500"
+            className="size-6 group-hover:translate-x-1 group-hover:text-black transition-all duration-200"
           >
             <path
               fillRule="evenodd"

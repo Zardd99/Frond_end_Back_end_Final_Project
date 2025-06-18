@@ -34,7 +34,7 @@ const Menu = ({ allMenuPage }) => (
         </div>
       )}
       <div className="cal-sans-regular text-xl mt-4 md-mt-0 flex flex-col md:flex-row justify-between w-full gap-y-4">
-        <div className="max-w-[36ch] text-sm text-hero-gray-600 md:text-xl">
+        <div className="max-w-[36ch] text-sm text-hero-hero-gray-600 md:text-xl">
           {MENU_CONTENT[0]?.description}
         </div>
         <div className="flex flex-wrap gap-6 pt-4">
@@ -52,22 +52,22 @@ const Menu = ({ allMenuPage }) => (
                   }
                 }, 100);
               }}
-              className="group relative overflow-hidden bg-gradient-to-r from-foodle-brand-500 to-foodle-accent-500 hover:from-foodle-brand-600 hover:to-foodle-accent-600 text-light font-semibold px-4 py-2 md:px-8 md:py-4 rounded-full shadow-2xl hover:shadow-[0_10px_30px_rgba(249,115,22,0.25)] transition-all duration-300 transform hover:scale-105"
+              className="group relative inline-flex items-center px-8 py-4 bg-black text-hero-hero-white font-semibold rounded-full hover:bg-hero-hero-gray-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-hero-hero-gray-200"
             >
               <div className="flex items-center gap-3">
                 <span className="text-sm md:text-lg">Back To Home Page</span>
               </div>
-              <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
+              <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
             </Link>
           ) : (
             <Link
               to="/allmenu"
-              className="group relative overflow-hidden bg-gradient-to-r from-foodle-brand-500 to-foodle-accent-500 hover:from-foodle-brand-600 hover:to-foodle-accent-600 text-light font-semibold px-4 py-2 md:px-8 md:py-4 rounded-full shadow-2xl hover:shadow-[0_10px_30px_rgba(249,115,22,0.25)] transition-all duration-300 transform hover:scale-105"
+              className="group relative inline-flex items-center px-8 py-4 bg-black text-hero-hero-white font-semibold rounded-full hover:bg-hero-hero-gray-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-hero-hero-gray-200"
             >
               <div className="flex items-center gap-3">
                 <span className="text-sm md:text-lg">See All</span>
               </div>
-              <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
+              <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
             </Link>
           )}
         </div>

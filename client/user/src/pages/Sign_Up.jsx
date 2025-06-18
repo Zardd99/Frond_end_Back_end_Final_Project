@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext";
-import { Navigate } from "react-router-dom";
+import { signUpNewUser } from "../context/AuthContext";
 
 const Sign_Up = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +8,6 @@ const Sign_Up = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
 
-  const { signUpNewUser } = UserAuth();
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
@@ -20,25 +18,17 @@ const Sign_Up = () => {
     try {
       const result = await signUpNewUser(email, password);
 
-      if (!result?.error) return;
-
-      const defaultMessage = "Something went wrong";
-      const message = result.error.message?.includes("already exists")
-        ? "An account with this email already exists. Please login instead."
-        : result.error.message || defaultMessage;
-
-      console.log(result.error.message);
-      setError(message);
-
-      //
-      // Redirect to Home Page when Login Success
-      //
-      //
       if (result.success) {
-        navigate("/");
+        alert(
+          "Sign-up successful! Please check your email to verify your account."
+        );
+        navigate("/login");
+      } else if (result.error) {
+        setError(result.error.message || "Sign-up failed. Please try again.");
       }
     } catch (err) {
-      setError("an error occurred", err);
+      console.error("Handle sign up catch block error:", err);
+      setError("An unexpected error occurred.");
     } finally {
       setLoading(false);
     }

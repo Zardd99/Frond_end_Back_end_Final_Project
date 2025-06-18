@@ -269,7 +269,7 @@ const Navbar = () => {
         {/*  */}
 
         <div
-          className={`absolute top-20 right-8 w-80 transition-all duration-300 ease-out ${
+          className={`absolute top-20 left-0  w-80 transition-all duration-300 ease-out ${
             isNavbarVisible
               ? "flex opacity-100 translate-y-0"
               : "hidden opacity-0 -translate-y-4"

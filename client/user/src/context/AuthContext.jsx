@@ -17,13 +17,14 @@ export const AuthContextProvider = ({ children }) => {
     if (session?.user) {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("role")
+        .select("role, banned_until")
         .eq("user_id", session.user.id)
         .single();
 
       setUser({
         ...session.user,
         role: profile?.role || "user",
+        banned_until: profile?.banned_until,
       });
     } else {
       setUser(null);
@@ -32,10 +33,48 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    const fetchSession = async () => {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        await handleAuthState(session);
+      } catch (error) {
+        console.error("Session fetch error:", error);
+        await supabase.auth.signOut();
+        setSession(null);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSession();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === "SIGNED_OUT") {
+        localStorage.removeItem("sb-access-token");
+        localStorage.removeItem("sb-refresh-token");
+      }
+      handleAuthState(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       handleAuthState(session);
     });
-    supabase.auth.onAuthStateChange((_event, session) => {
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "TOKEN_REFRESHED") {
+        console.log("Token refreshed successfully");
+      } else if (event === "SIGNED_OUT" || event === "USER_DELETED") {
+        localStorage.removeItem("sb-access-token");
+        localStorage.removeItem("sb-refresh-token");
+      }
       handleAuthState(session);
     });
   }, []);
@@ -44,18 +83,15 @@ export const AuthContextProvider = ({ children }) => {
   // sign out
   //
   //
-  const signOut = () => {
-    const { error } = supabase.auth.signOut();
-    if (error) {
-      console.error("There an error", error);
-    }
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    localStorage.removeItem("sb-access-token");
+    localStorage.removeItem("sb-refresh-token");
   };
 
   const value = {
     session,
-    signUpNewUser,
     signOut,
-    loginUser,
     user,
     loading,
   };
@@ -66,33 +102,33 @@ export const AuthContextProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
 export const signUpNewUser = async (email, password) => {
   try {
     const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-      options: {
-        data: {
-          username: email.split("@")[0],
-        },
-      },
+      email,
+      password,
     });
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("user_id", data.user.id);
 
     if (error) {
-      console.error("There was a problem signing up", error);
+      if (error.message.includes("already registered")) {
+        return {
+          success: false,
+          error: { message: "Email already registered" },
+        };
+      }
       return { success: false, error };
     }
+
     return { success: true, data };
   } catch (error) {
-    console.error("Unexpected error:", error);
+    //
+    //
+    // Debugging: Log the error to the console
+    //
+    console.error("An unexpected error occurred during registration:", error);
     return {
       success: false,
-      error: { message: "Registration failed. Please try again." },
+      error: { message: "Registration failed" },
     };
   }
 };
@@ -105,16 +141,19 @@ export const loginUser = async (email, password) => {
     });
 
     if (error) {
-      console.error("log in error occurred", error);
+      console.error("Log in error occurred:", error);
       return { success: false, error: error.message };
     }
-    console.log("login success", data);
+    console.log("Login success:", data);
     return { success: true, data };
   } catch (error) {
-    console.error("an error occurred", error);
+    console.error("An unexpected error occurred during login:", error);
+    return {
+      success: false,
+      error: { message: "An unexpected error occurred." },
+    };
   }
 };
-
 export const UserAuth = () => {
   return useContext(AuthContext);
 };
