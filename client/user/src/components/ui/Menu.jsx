@@ -55,21 +55,13 @@ const Menu = ({ allMenuPage }) => (
               className="group relative inline-flex items-center px-8 py-4 bg-black text-hero-hero-white font-semibold rounded-full hover:bg-hero-hero-gray-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-hero-hero-gray-200"
             >
               <div className="flex items-center gap-3">
-                <span className="text-sm md:text-lg">Back To Home Page</span>
+                <span className="text-sm md:text-lg text-hero-white">
+                  Back To Home Page
+                </span>
               </div>
               <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
             </Link>
-          ) : (
-            <Link
-              to="/allmenu"
-              className="group relative inline-flex items-center px-8 py-4 bg-black text-hero-hero-white font-semibold rounded-full hover:bg-hero-hero-gray-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-hero-hero-gray-200"
-            >
-              <div className="flex items-center gap-3">
-                <span className="text-sm md:text-lg">See All</span>
-              </div>
-              <div className="absolute inset-0 -top-[200%] bg-gradient-to-r from-transparent via-hero-hero-white/30 to-transparent skew-y-12 group-hover:top-[200%] transition-all duration-700"></div>
-            </Link>
-          )}
+          ) : null}
         </div>
       </div>
     </div>
