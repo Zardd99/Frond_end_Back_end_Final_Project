@@ -60,11 +60,36 @@ const MenuCard = ({ allMenuPage }) => {
         <div className="w-24 h-1 bg-gradient-to-r from-black to-hero-gray-600 mx-auto rounded-full"></div>
       </div>
 
+      {!allMenuPage && menuItems.length > 8 && (
+        <div className="text-center mt-12">
+          <Link
+            to="/allmenu"
+            className="inline-flex items-center px-8 py-4 bg-black text-hero-white font-semibold rounded-full hover:bg-hero-gray-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-hero-gray-200"
+          >
+            View All Menu Items
+            <svg
+              className="w-5 h-5 ml-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </Link>
+        </div>
+      )}
+      <div className="p-4"></div>
+
       <div
         className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 ${
           allMenuPage
             ? ""
-            : "max-h-[1200px] overflow-y-scroll overflow-x-hidden"
+            : "max-h-[1200px] overflow-y-scroll overflow-x-hidden sm:overflow-auto"
         }`}
       >
         {(allMenuPage ? menuItems : menuItems.slice(0, 8)).map((item) => (
@@ -114,30 +139,6 @@ const MenuCard = ({ allMenuPage }) => {
           </Link>
         ))}
       </div>
-
-      {!allMenuPage && menuItems.length > 8 && (
-        <div className="text-center mt-12">
-          <Link
-            to="/allmenu"
-            className="inline-flex items-center px-8 py-4 bg-black text-hero-white font-semibold rounded-full hover:bg-hero-gray-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-hero-gray-200"
-          >
-            View All Menu Items
-            <svg
-              className="w-5 h-5 ml-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </Link>
-        </div>
-      )}
     </div>
   );
 };

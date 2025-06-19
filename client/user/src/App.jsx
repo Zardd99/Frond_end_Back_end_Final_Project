@@ -12,6 +12,7 @@ const AllMenu = lazy(() => import("./pages/AllMenu"));
 const MenuItemDetail = lazy(() =>
   import("./components/form/MenuItemDetail/MenuItemDetail")
 );
+const ForgetPassword = lazy(() => import("./pages/ForgetPassword"));
 const DashboardLayout = lazy(() => import("./components/form/DashboardLayout"));
 const AdminDashboard = lazy(() =>
   import("../../admin/src/components/form/AdminDashboard")
@@ -33,6 +34,9 @@ function App() {
             <Route path="/signup" element={<Sign_Up />} />
             <Route path="/allmenu" element={<AllMenu />} />
             <Route path="/menu/:itemId" element={<MenuItemDetail />} />
+            <Route path="/forgot-password" element={<ForgetPassword />} />
+
+            {/* Private Routes */}
             <Route element={<PrivateRoute allowedRoles={["user", "Admin"]} />}>
               <Route path="/dashboard" element={<DashboardLayout />} />
               <Route element={<PrivateRoute allowedRoles={["Admin"]} />}>

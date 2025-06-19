@@ -13,7 +13,7 @@ const Menu = ({ allMenuPage }) => (
     id="menu"
   >
     {/*  */}
-    {/* Render "Go Back To Home Page When All MenuPage is Open" else Render "See All on the Button" */}
+    {/* Render "Go Back To Home Page" When All MenuPage is Open else Render Nothing */}
     {/*  */}
     <div className="Menu__Header flex flex-col justify-between">
       {allMenuPage ? (
