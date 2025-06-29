@@ -11,3 +11,12 @@
 # Run with new image
 
 - docker run -p 5173:5173 [myapp]
+
+# tag local image
+
+- docker tag restaurant_app_final:latest yourusername/restaurant_app_final:latest
+
+# push to docker hub
+
+- docker login  # Log in to Docker Hub
+docker push zarde/restaurant_app_final:latest

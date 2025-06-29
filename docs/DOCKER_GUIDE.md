@@ -1,4 +1,6 @@
 # Docker Pull/Run guide
 
-- docker pull zarde/restaurant_app_final
-- docker run -p 5173:5173 zarde/restaurant_app_final
+- docker pull zarde/restaurant_app_final:latest
+- docker run -d -p 5173:5173 --name restaurant-app-final zarde/restaurant_app_final:latest
+
+- open http://localhost:5173 in your browser
